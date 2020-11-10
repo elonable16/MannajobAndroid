@@ -75,10 +75,10 @@ public class LoginActivity extends AppCompatActivity implements MyApplication.On
         mOauthTokenType = (TextView) findViewById(R.id.oauth_type);
         mOAuthState = (TextView) findViewById(R.id.oauth_state);
         mOAuthLoginModule.init(
-                com.kel.foodbest.LoginActivity.this
-                ,"w7uEYyc3AeYOmO9_XMbc"
-                , "mdP7muOCeR"
-                ,"FoodBest"
+                com.ateam.mannajob.LoginActivity.this
+                ,"DOUPfgH6gVD3oT4MgNca"
+                , "HLrt0ibn45"
+                ,"Mannajob"
                 //,OAUTH_CALLBACK_INTENT
                 // SDK 4.1.4 버전부터는 OAUTH_CALLBACK_INTENT변수를 사용하지 않습니다.
         );

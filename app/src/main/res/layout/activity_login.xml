@@ -5,7 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
-
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/MYOrange"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인"
+        android:id="@+id/toolbar_title"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFFFF"
+        android:textStyle="bold"
+        />
+    </androidx.appcompat.widget.Toolbar>
     <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
         android:id="@+id/buttonOAuthLoginImg"
         android:layout_width="match_parent"
@@ -15,30 +32,30 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/login_ok_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/select_button"
         android:text="로그인"
         app:layout_constraintBottom_toTopOf="@+id/buttonOAuthLoginImg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.845"
+        app:layout_constraintHorizontal_bias="0.294"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.559" />
+        app:layout_constraintVertical_bias="0.294" />
 
     <Button
-        android:id="@+id/registerButton"
+        android:id="@+id/register_m_Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/select_button"
         android:text="회원가입"
         app:layout_constraintBottom_toTopOf="@+id/buttonOAuthLoginImg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintHorizontal_bias="0.743"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.559" />
+        app:layout_constraintVertical_bias="0.294" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -47,30 +64,29 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/buttonOAuthLoginImg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.722">
+        app:layout_constraintVertical_bias="0.508">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:text="ID"
-                android:textSize="17sp" />
-
             <EditText
-                android:id="@+id/editTextId"
+                android:id="@+id/login_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/editbox"
+                android:ems="13"
+                android:hint="ID"
+                android:inputType="textPersonName"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="10dp" />
 
         </LinearLayout>
 
@@ -79,20 +95,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:text="PASSWORD"
-                android:textSize="17sp" />
-
             <EditText
-                android:id="@+id/editTextPassword"
+                android:id="@+id/login_passwd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:background="@drawable/editbox"
+                android:ems="13"
+                android:hint="PASSWORD"
+                android:inputType="textPersonName"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="10dp" />
 
         </LinearLayout>
     </LinearLayout>
