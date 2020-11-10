@@ -40,10 +40,10 @@ public class LoginActivity extends AppCompatActivity implements MyApplication.On
     }
 
     private void init(){
-        ID = findViewById(R.id.editTextId);
-        PASSWORD =findViewById(R.id.editTextPassword);
+        ID = findViewById(R.id.login_id);
+        PASSWORD =findViewById(R.id.login_passwd);
 
-        loginButton = findViewById(R.id.loginButton);
+        loginButton = findViewById(R.id.login_ok_btn);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements MyApplication.On
 
             }
         });
-        registerButton=findViewById(R.id.registerButton);
+        registerButton=findViewById(R.id.register_m_Btn);
         registerButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
