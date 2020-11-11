@@ -19,7 +19,7 @@
         <activity android:name=".PopReview" />
         <activity android:name=".PopOkMatching" />
         <activity android:name=".PopRequestMatch" />
-        <activity android:name=".PopPasswdCheck" />
+        <activity android:name=".PopPasswdCheck" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity android:name=".UpdateProfile" />
         <activity android:name=".Join" />
         <activity android:name=".LoginActivity" />
