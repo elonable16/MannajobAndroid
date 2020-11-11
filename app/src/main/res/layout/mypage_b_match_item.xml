@@ -47,7 +47,7 @@
                     android:paddingLeft="10dp" />
 
                 <TextView
-                    android:id="@+id/q_category"
+                    android:id="@+id/b_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -67,7 +67,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/b_match_ok_btn"
+                    android:id="@+id/b_match_end_btn"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
                     android:background="@drawable/select_button"

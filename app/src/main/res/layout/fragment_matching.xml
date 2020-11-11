@@ -29,7 +29,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/EditTextSearch"
+            android:id="@+id/search_corp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -39,7 +39,7 @@
             android:hint="직장명을 입력하세요"
             android:inputType="textPersonName" />
         <Button
-            android:id="@+id/searchButton2"
+            android:id="@+id/search_corp_btn"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:background="@drawable/select_button"

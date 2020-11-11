@@ -46,14 +46,14 @@
                     app:srcCompat="@drawable/notice_16" />
 
                 <TextView
-                    android:id="@+id/b_num"
+                    android:id="@+id/n_num_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="5"
                     android:hint="0001"/>
 
                 <TextView
-                    android:id="@+id/b_subject"
+                    android:id="@+id/n_subject_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
@@ -104,7 +104,7 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/dateTextView"
+                    android:id="@+id/n_wdate_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"

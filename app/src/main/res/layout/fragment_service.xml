@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context=".Service">
     <lib.kingja.switchbutton.SwitchMultiButton
-        android:id="@+id/switchButton"
+        android:id="@+id/service_switchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
@@ -29,7 +29,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/EditTextSearch"
+            android:id="@+id/search_service_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -39,7 +39,7 @@
             android:hint="글 제목을 입력하세요"
             android:inputType="textPersonName" />
         <Button
-            android:id="@+id/searchButton2"
+            android:id="@+id/search_service_btn"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:background="@drawable/select_button"
@@ -47,7 +47,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerView_service"
+        android:id="@+id/service_recyc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp" />

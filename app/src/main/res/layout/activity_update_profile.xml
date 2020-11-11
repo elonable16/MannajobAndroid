@@ -33,34 +33,11 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
         android:paddingLeft="10dp"
-        android:text="ID"
-        android:textSize="13sp" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/editbox_gray"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
-        android:paddingLeft="10dp"
         android:text="PASSWORD"
         android:textSize="13sp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/update_passwd"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -74,7 +51,6 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/textView5"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -84,7 +60,7 @@
         android:textSize="13sp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName5"
+        android:id="@+id/update_phone"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -107,7 +83,7 @@
         android:textSize="13sp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName6"
+        android:id="@+id/update_email"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -134,6 +110,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:paddingLeft="10dp"
+            android:background="@drawable/select_button"
             android:text="가입" />
 
         <Button
@@ -144,6 +121,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="30dp"
             android:paddingLeft="10dp"
+            android:background="@drawable/select_button"
             android:text="취소" />
     </LinearLayout>
 </LinearLayout>

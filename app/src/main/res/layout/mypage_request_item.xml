@@ -47,7 +47,7 @@
                     android:paddingLeft="10dp" />
 
                 <TextView
-                    android:id="@+id/q_category"
+                    android:id="@+id/mat_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"

@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context=".Mypage">
     <lib.kingja.switchbutton.SwitchMultiButton
-        android:id="@+id/switchButton"
+        android:id="@+id/mypage_switchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
@@ -39,7 +39,7 @@
                 android:src="@drawable/profile" />
 
             <Button
-                android:id="@+id/logout"
+                android:id="@+id/update_profile_btn"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:layout_gravity="right"
@@ -82,7 +82,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textMypageID"
+                        android:id="@+id/mypage_ID"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -109,7 +109,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textMypageEmail"
+                        android:id="@+id/mypageEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -143,7 +143,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textMypageID"
+                        android:id="@+id/mypage_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -170,7 +170,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textMypageID"
+                        android:id="@+id/mypage_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -187,6 +187,7 @@
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/container_mypage"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

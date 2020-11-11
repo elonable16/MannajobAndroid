@@ -2,4 +2,17 @@
     <string name="app_name">MannajobAndroid</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="complA">의도적으로 게시물을 도배</string>
+    <string name="complB">상관없는 게시물이나 광고 등록</string>
+    <string name="complC">무단으로 매칭 파기</string>
+    <string name="complD">매칭에서 과도한 금품이나 보상 요구</string>
+    <string name="complE">직접 입력</string>
+
+
+
+    <string name="request_cancel">게시판 매칭 취소</string>
+    <string name="like">좋아요</string>
+    <string name="dislike">싫어요</string>
+
+
 </resources>

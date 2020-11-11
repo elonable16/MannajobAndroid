@@ -32,14 +32,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/b_num"
+                    android:id="@+id/q_num_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="5"
                     android:hint="0001"/>
 
                 <TextView
-                    android:id="@+id/b_subject"
+                    android:id="@+id/q_subject_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
@@ -67,7 +67,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/q_category"
+                    android:id="@+id/q_category_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
@@ -95,7 +95,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/textView8"
+                            android:id="@+id/q_m_id_item"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
@@ -119,7 +119,7 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/dateTextView"
+                    android:id="@+id/q_wdate_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"

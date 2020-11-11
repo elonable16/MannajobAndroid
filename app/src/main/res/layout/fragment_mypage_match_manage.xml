@@ -26,6 +26,7 @@
             android:text="신청현황" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mypage_request_state_recyc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
@@ -49,6 +50,7 @@
             android:text="작성현황" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mypage_edit_state_recyc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
