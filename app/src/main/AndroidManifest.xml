@@ -15,7 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MannajobAndroid"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UpdateProfile"></activity>
+        <activity android:name=".PopCompl"></activity>
+        <activity android:name=".PopReview" />
+        <activity android:name=".PopOkMatching" />
+        <activity android:name=".PopRequestMatch" />
+        <activity android:name=".PopPasswdCheck" />
+        <activity android:name=".UpdateProfile" />
         <activity android:name=".Join" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">

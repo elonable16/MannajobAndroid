@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="switch_match">
+        <item>현직자</item>
+        <item>취준생</item>
+    </string-array>
+    <string-array name="switch_service">
+        <item>공지</item>
+        <item>QnA</item>
+    </string-array>
+    <string-array name="switch_mypage">
+        <item>일정</item>
+        <item>매칭</item>
+    </string-array>
+</resources>

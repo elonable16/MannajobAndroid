@@ -2,4 +2,5 @@
 <resources>
     <color name = "MYOrange">#FFFF9800</color>
     <color name = "money">#F44336</color>
+    <color name = "date">#1E88E5</color>
 </resources>
