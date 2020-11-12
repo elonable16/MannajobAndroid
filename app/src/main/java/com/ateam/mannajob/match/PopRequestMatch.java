@@ -1,10 +1,13 @@
-package com.ateam.mannajob;
+package com.ateam.mannajob.match;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 
-public class PopRequestMatch extends AppCompatActivity {
+import com.ateam.mannajob.R;
+
+public class PopRequestMatch extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

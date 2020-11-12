@@ -3,6 +3,7 @@ package com.ateam.mannajob;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,11 +73,6 @@ public class LoginActivity extends AppCompatActivity implements MyApplication.On
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     private void naverLogin(){
-        mOauthAT = (TextView) findViewById(R.id.oauth_access_token);
-        mOauthRT = (TextView) findViewById(R.id.oauth_refresh_token);
-        mOauthExpires = (TextView) findViewById(R.id.oauth_expires);
-        mOauthTokenType = (TextView) findViewById(R.id.oauth_type);
-        mOAuthState = (TextView) findViewById(R.id.oauth_state);
         mOAuthLoginModule.init(
                 com.ateam.mannajob.LoginActivity.this
                 ,"DOUPfgH6gVD3oT4MgNca"
@@ -97,11 +93,11 @@ public class LoginActivity extends AppCompatActivity implements MyApplication.On
                 String refreshToken = mOAuthLoginModule.getRefreshToken(mContext);
                 long expiresAt = mOAuthLoginModule.getExpiresAt(mContext);
                 String tokenType = mOAuthLoginModule.getTokenType(mContext);
-                mOauthAT.setText(accessToken);
-                mOauthRT.setText(refreshToken);
-                mOauthExpires.setText(String.valueOf(expiresAt));
-                mOauthTokenType.setText(tokenType);
-                mOAuthState.setText(mOAuthLoginModule.getState(mContext).toString());
+                Log.d("accessToken : ",accessToken);
+                Log.d("refreshToken : ",refreshToken);
+                Log.d("expiresAt : ",String.valueOf(expiresAt));
+                Log.d("tokenType : ",tokenType);
+                Log.d("LoginModule:getState  :",mOAuthLoginModule.getState(mContext).toString());
             } else {
                 String errorCode = mOAuthLoginModule.getLastErrorCode(mContext).getCode();
                 String errorDesc = mOAuthLoginModule.getLastErrorDesc(mContext);
@@ -110,6 +106,4 @@ public class LoginActivity extends AppCompatActivity implements MyApplication.On
             }
         };
     };
-
-
 }

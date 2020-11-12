@@ -1,4 +1,4 @@
-package com.ateam.mannajob;
+package com.ateam.mannajob.serivce;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ateam.mannajob.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link BoardQnA#newInstance} factory method to
+ * Use the {@link BoardNotice#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BoardQnA extends Fragment {
+public class BoardNotice extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class BoardQnA extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public BoardQnA() {
+    public BoardNotice() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class BoardQnA extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BoardQnA.
+     * @return A new instance of fragment BoardNotice.
      */
     // TODO: Rename and change types and number of parameters
-    public static BoardQnA newInstance(String param1, String param2) {
-        BoardQnA fragment = new BoardQnA();
+    public static BoardNotice newInstance(String param1, String param2) {
+        BoardNotice fragment = new BoardNotice();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class BoardQnA extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_board_qna, container, false);
+        return inflater.inflate(R.layout.fragment_board_notice, container, false);
     }
 }

@@ -167,7 +167,8 @@
                     android:gravity="right"
                     android:text="청주시 오창읍"
                     android:textSize="10sp"
-                    tools:layout_weight="1" />
+                    android:layout_weight="1"
+                     />
 
                 <TextView
                     android:id="@+id/b_wdate"

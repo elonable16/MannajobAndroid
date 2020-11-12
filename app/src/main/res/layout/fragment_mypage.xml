@@ -7,13 +7,13 @@
     android:layout_marginBottom="60dp"
     android:layout_marginTop="60dp"
     android:orientation="vertical"
-    tools:context=".Mypage">
+    tools:context=".mypage.Mypage">
     <lib.kingja.switchbutton.SwitchMultiButton
         android:id="@+id/mypage_switchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:padding="8dp"
+        android:padding="4dp"
         app:selectedColor="@color/MYOrange"
         app:selectedTab="0"
         app:strokeRadius="15dp"

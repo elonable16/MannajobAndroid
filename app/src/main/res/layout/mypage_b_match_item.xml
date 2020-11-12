@@ -32,7 +32,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/b_num"
+                    android:id="@+id/b_num_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="3"

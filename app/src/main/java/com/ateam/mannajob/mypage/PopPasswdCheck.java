@@ -1,10 +1,12 @@
-package com.ateam.mannajob;
+package com.ateam.mannajob.mypage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
+
+import com.ateam.mannajob.R;
 
 public class PopPasswdCheck extends Activity {
 

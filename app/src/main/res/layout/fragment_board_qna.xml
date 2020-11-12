@@ -7,7 +7,7 @@
     android:layout_marginBottom="60dp"
     android:layout_marginTop="60dp"
     android:orientation="vertical"
-    tools:context=".BoardQnA">
+    tools:context=".serivce.BoardQnA">
 
     <LinearLayout
         android:layout_width="wrap_content"

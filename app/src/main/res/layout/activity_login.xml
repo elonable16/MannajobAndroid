@@ -32,19 +32,6 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:id="@+id/login_ok_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/select_button"
-        android:text="로그인"
-        app:layout_constraintBottom_toTopOf="@+id/buttonOAuthLoginImg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.294"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.294" />
-
-    <Button
         android:id="@+id/register_m_Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,7 +39,20 @@
         android:text="회원가입"
         app:layout_constraintBottom_toTopOf="@+id/buttonOAuthLoginImg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.743"
+        app:layout_constraintHorizontal_bias="0.721"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.294" />
+
+    <Button
+        android:id="@+id/login_ok_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/select_button"
+        android:text="로그인"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOAuthLoginImg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:layout_constraintVertical_bias="0.294" />
@@ -64,7 +64,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/buttonOAuthLoginImg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.508">
@@ -84,16 +84,17 @@
                 android:hint="ID"
                 android:inputType="textPersonName"
                 android:paddingLeft="15dp"
-                android:paddingTop="10dp"
+                android:paddingTop="7dp"
                 android:paddingRight="5dp"
-                android:paddingBottom="10dp" />
+                android:paddingBottom="7dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
 
             <EditText
                 android:id="@+id/login_passwd"
@@ -104,9 +105,9 @@
                 android:hint="PASSWORD"
                 android:inputType="textPersonName"
                 android:paddingLeft="15dp"
-                android:paddingTop="10dp"
+                android:paddingTop="7dp"
                 android:paddingRight="5dp"
-                android:paddingBottom="10dp" />
+                android:paddingBottom="7dp" />
 
         </LinearLayout>
     </LinearLayout>
@@ -123,96 +124,31 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:text="AT" />
-
-            <TextView
-                android:id="@+id/oauth_access_token"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="AT" />
-        </LinearLayout>
+            android:orientation="horizontal"/>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:text="RT" />
-
-            <TextView
-                android:id="@+id/oauth_refresh_token"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="AT" />
-        </LinearLayout>
+            android:orientation="horizontal"/>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:text="expires" />
-
-            <TextView
-                android:id="@+id/oauth_expires"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="-1" />
-        </LinearLayout>
+            android:orientation="horizontal"/>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:text="type" />
-
-            <TextView
-                android:id="@+id/oauth_type"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="bearer?" />
-        </LinearLayout>
+            android:orientation="horizontal"/>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:text="현재상태" />
-
-            <TextView
-                android:id="@+id/oauth_state"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="state?" />
-        </LinearLayout>
+            android:orientation="horizontal"/>
 
     </LinearLayout>
 

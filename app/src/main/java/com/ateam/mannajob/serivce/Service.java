@@ -1,4 +1,4 @@
-package com.ateam.mannajob;
+package com.ateam.mannajob.serivce;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,24 +10,26 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
+import com.ateam.mannajob.R;
+import com.ateam.mannajob.mypage.PopPasswdCheck;
 
 
-public class Mypage extends Fragment {
-
+public class Service extends Fragment {
     Context context;
-    Button update_profile_btn;
+
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         this.context = context;
     }
+
     @Override
-    public void onDetach(){
+    public void onDetach() {
         super.onDetach();
-        if(context!= null){
-            context=null;
+        if (context != null) {
+            context = null;
         }
     }
 
@@ -35,15 +37,12 @@ public class Mypage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_mypage, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_service, container, false);
         initUI(rootView);
         return rootView;
     }
-    private  void  initUI(ViewGroup rootview) {
-        update_profile_btn = rootview.findViewById(R.id.update_profile_btn);
-        update_profile_btn.setOnClickListener(v -> {
-            Intent intent = new Intent(context,PopPasswdCheck.class);
-            startActivityForResult(intent,101);
-        });
+
+    private void initUI(ViewGroup rootview) {
+
     }
 }
