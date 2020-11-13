@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context=".match.PopRequestMatch">
     <LinearLayout
         android:layout_width="370dp"
@@ -23,11 +23,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
             android:gravity="left"
             android:orientation="horizontal">
 
@@ -40,8 +40,7 @@
                 android:id="@+id/mat_stdate_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/year"
-                />
+                android:entries="@array/year" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,7 +51,7 @@
                 android:id="@+id/mat_stdate_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/month"/>
+                android:entries="@array/month" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -63,32 +62,31 @@
                 android:id="@+id/mat_stdate_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/day"
-                />
+                android:entries="@array/day" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
             android:gravity="left"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:text="시작시간" />
+
             <Spinner
-                android:id="@+id/mat_stdate_"
+                android:id="@+id/mat_stdate_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/hour"
-                />
+                android:entries="@array/hour" />
 
 
         </LinearLayout>
@@ -97,6 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:background="@drawable/popfooter">

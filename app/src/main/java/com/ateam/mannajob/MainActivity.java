@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     }
 
     public void onTabSelected(int position, Object item) { // fragment에서 이벤트 연결시 이동을 위한 메소드 작성 버튼, 취소 버튼을 누를 시 selected item이 변경됨으로  onnavigationItemSelected에 의해 해당 페이지로 이동
-        bundle = new Bundle(1);
+        bundle = new Bundle();
         if (position == AppConstants.FRAGMENT_MATCH) {
             bottomNavigation.setSelectedItemId(R.id.tab1);
         } else if (position == AppConstants.FRAGMENT_SERVICE) {
@@ -152,16 +153,19 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         } else if (position == AppConstants.FRAGMENT_BOARD_MATCH){
             MatchDTO matchDTO = (MatchDTO)item;
             bundle.putSerializable("item", matchDTO);
+            boardMatching_f.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.container_main, boardMatching_f).commit();
         }
         else if (position == AppConstants.FRAGMENT_BOARD_NOTICE){
             NoticeDTO noticeDTO = (NoticeDTO)item;
             bundle.putSerializable("item", noticeDTO);
+            boardNotice_f.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.container_main, boardNotice_f).commit();
         }
         else if (position == AppConstants.FRAGMENT_BOARD_QNA){
             QnADTO qnaDTO = (QnADTO) item;
             bundle.putSerializable("item", qnaDTO);
+            boardQnA_f.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.container_main, boardQnA_f).commit();
         }
         else if (position == AppConstants.FRAGMENT_CALENDAR){
@@ -179,8 +183,10 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             url = new URL("http://192.168.0.225:8080/resources/img/productimg/"+profile_file_name);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.connect();
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 4;
             InputStream is = conn.getInputStream();
-            bitmap = BitmapFactory.decodeStream(is);
+            bitmap = BitmapFactory.decodeStream(is,null,options);
             handler.sendEmptyMessage(0);
             is.close();
             conn.disconnect();

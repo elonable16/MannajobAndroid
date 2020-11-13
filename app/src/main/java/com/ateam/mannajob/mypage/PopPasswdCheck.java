@@ -14,8 +14,7 @@ public class PopPasswdCheck extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-
+        this.setFinishOnTouchOutside(false);
         setContentView(R.layout.activity_pop_passwd_check);
 
     }

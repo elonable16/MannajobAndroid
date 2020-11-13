@@ -42,12 +42,13 @@
                 android:text="ID"
                 android:textSize="17sp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/complID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/editbox_gray"
                 android:ems="10"
+                android:gravity="center"
                 android:inputType="textPersonName"
                 android:padding="3dp" />
 
@@ -127,6 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:background="@drawable/popfooter">
@@ -141,7 +143,7 @@
                 android:text="신고" />
 
             <Button
-                android:id="@+id/compl_cancle_btn"
+                android:id="@+id/compl_cancel_btn"
                 android:layout_width="50dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"

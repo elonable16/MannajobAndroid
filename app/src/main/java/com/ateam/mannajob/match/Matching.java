@@ -71,10 +71,10 @@ public class Matching extends Fragment {
         adapter.setItems(list);
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();
-        list.add( new MatchDTO(1,"현직자","idimda","삼성전자","IT/네트워크",10000,"오창읍","2020-10-10","2020-10-10","1","elon1","", now,"default.jpg"));
-        list.add( new MatchDTO(1,"현직자","idimda","삼성전자","IT/네트워크",10000,"오창읍","2020-10-10","2020-10-10","1","elon1","", now,"4.jpg"));
-        list.add( new MatchDTO(1,"현직자","idimda","삼성전자","IT/네트워크",10000,"오창읍","2020-10-10","2020-10-10","1","elon1","", now,"5.jpg"));
-        list.add( new MatchDTO(1,"현직자","idimda","삼성전자","IT/네트워크",10000,"오창읍","2020-10-10","2020-10-10","1","elon1","", now,"6.jpg"));
+        list.add( new MatchDTO(1,"현직자","idimda","삼성전자","IT/네트워크",10000,"오창읍","2020-10-10","2020-10-10","1","elon1","", now,"default.jpg","감사합니다"));
+        list.add( new MatchDTO(1,"현직자","idimda","삼성전자","IT/네트워크",10000,"오창읍","2020-10-10","2020-10-10","1","elon1","", now,"4.jpg","감사합니다."));
+        list.add( new MatchDTO(1,"현직자","idimda","삼성전자","IT/네트워크",10000,"오창읍","2020-10-10","2020-10-10","1","elon1","", now,"5.jpg","감사합니다"));
+        list.add( new MatchDTO(1,"현직자","idimda","삼성전자","IT/네트워크",10000,"오창읍","2020-10-10","2020-10-10","1","elon1","", now,"6.jpg","감사합니다."));
         matchingRecyc.setAdapter(adapter);
 //////////adapter 리스너 정의//////
         adapter.setOnItemClickListner(new OnMatchItemClickListener() {
