@@ -23,7 +23,8 @@
         <activity android:name=".mypage.UpdateProfile" />
         <activity android:name=".Join" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

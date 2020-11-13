@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import lib.kingja.switchbutton.SwitchMultiButton;
+
 
 public class Matching extends Fragment {
     private static final String TAG = "Matching";
@@ -34,6 +36,8 @@ public class Matching extends Fragment {
     MatchAdapter adapter;
     Context context;
     OnFragmentItemSelectedListener listener;
+    SwitchMultiButton switchMultiButton;
+    int switchpostion;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -61,6 +65,13 @@ public class Matching extends Fragment {
         return rootView;
     }
     private  void  initUI(ViewGroup rootview) {
+        switchMultiButton = rootview.findViewById(R.id.switchButton);
+        switchMultiButton.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {
+            @Override
+            public void onSwitch(int position, String tabText) {
+                switchpostion = position;
+            }
+        });
         matchingRecyc = rootview.findViewById(R.id.RecyclerView_b_match);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());

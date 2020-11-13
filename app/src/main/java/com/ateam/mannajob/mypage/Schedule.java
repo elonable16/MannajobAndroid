@@ -1,66 +1,145 @@
 package com.ateam.mannajob.mypage;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CalendarView;
 
+import com.ateam.mannajob.AppConstants;
+import com.ateam.mannajob.OnFragmentItemSelectedListener;
 import com.ateam.mannajob.R;
+import com.ateam.mannajob.recycleCalendar.CalendarAdapter;
+import com.ateam.mannajob.recycleCalendar.CalendarDTO;
+import com.ateam.mannajob.recycleCalendar.OnCalendarItemClickListener;
+import com.ateam.mannajob.recycleMatch.MatchAdapter;
+import com.ateam.mannajob.recycleMatch.MatchDTO;
+import com.ateam.mannajob.recycleMatch.OnMatchItemClickListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Schedule#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+import lib.kingja.switchbutton.SwitchMultiButton;
+
+
 public class Schedule extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Schedule() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Schedule.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Schedule newInstance(String param1, String param2) {
-        Schedule fragment = new Schedule();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private static final String TAG = "Schedule";
+    RecyclerView scheduleRecyc;
+    CalendarAdapter adapter;
+    Context context;
+    OnFragmentItemSelectedListener listener;
+    CalendarView calendarView;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+        if (context instanceof OnFragmentItemSelectedListener) {
+            listener = (OnFragmentItemSelectedListener) context;
         }
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+        if (context != null) {
+            context = null;
+            listener = null;
+        }
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule, container, false);
+
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_schedule, container, false);
+        initUI(rootView);
+
+        Log.d("test", "onCreateView s");
+
+        return rootView;
+    }
+
+    private void initUI(ViewGroup rootview) {
+
+        scheduleRecyc = rootview.findViewById(R.id.calendar_recyc);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        scheduleRecyc.setLayoutManager(layoutManager);
+
+        ArrayList<CalendarDTO> list = new ArrayList<>();
+        adapter = new CalendarAdapter();
+        adapter.setItems(list);
+        Calendar calendar = Calendar.getInstance();
+        Date now = calendar.getTime();
+        list.add(new CalendarDTO(1, "admin", "010-0000-0000", now, "03:00", "청주시 오창읍"));
+        scheduleRecyc.setAdapter(adapter);
+//////////adapter 리스너 정의//////
+        adapter.setOnItemClickListner(new OnCalendarItemClickListener(){
+            @Override
+            public void onItemClick(CalendarAdapter.ViewHolder viewHolder, View view, int position) {
+                CalendarDTO item = adapter.getItem(position);
+            }
+        });
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d("test", "onCreate s");
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d("test", "onActivityCreated s");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("test", "onStart s");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("test", "onResume s");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("test", "onPause s");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("test", "onStop s");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("test", "onDestroyView s");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("test", "onDestroy s");
     }
 }

@@ -69,8 +69,8 @@ public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> impl
             super(itemView);
 
             q_num_item = itemView.findViewById(R.id.q_num_item);
-            q_subject_item = itemView.findViewById(R.id.q_category_item);
-            q_category_item = itemView.findViewById(R.id.q_m_id_item);
+            q_subject_item = itemView.findViewById(R.id.q_subject_item);
+            q_category_item = itemView.findViewById(R.id.q_category_item);
             q_m_id_item = itemView.findViewById(R.id.q_m_id_item);
             q_wdate_item = itemView.findViewById(R.id.q_wdate_item);
 
@@ -86,7 +86,7 @@ public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> impl
             });
         }
         public void setItem(QnADTO item){ // 데이터화 화면 컴포넌트 연결
-            q_num_item.setText(item.getQ_num());
+            q_num_item.setText(Integer.toString(item.getQ_num()));
             q_subject_item.setText(item.getQ_subject());
             q_category_item.setText(item.getQ_category());
             q_m_id_item.setText(item.getM_id());

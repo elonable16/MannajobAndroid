@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,8 +12,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -36,6 +39,7 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.zip.Inflater;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -114,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                         return true;
                     case R.id.tab3:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container_main, mypage_f).commit();
-                        onTabSelected(AppConstants.FRAGMENT_CALENDAR,null);
+
                         return true;
 //                    case R.id.tab3:
 //                        if (LoginState.getState(getApplicationContext()).toString().equals("OK")) {
@@ -169,6 +173,8 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             getSupportFragmentManager().beginTransaction().replace(R.id.container_main, boardQnA_f).commit();
         }
         else if (position == AppConstants.FRAGMENT_CALENDAR){
+            Log.d("가나다라","마바사");
+            schedule_f = new Schedule();
             getSupportFragmentManager().beginTransaction().replace(R.id.container_mypage, schedule_f).commit();
         }
         else if (position == AppConstants.FRAGMENT_MATCHINGMANGER){
