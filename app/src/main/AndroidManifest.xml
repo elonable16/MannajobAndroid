@@ -15,15 +15,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MannajobAndroid"
         android:usesCleartextTraffic="true">
-        <activity android:name=".match.PopCompl" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
-        <activity android:name=".mypage.PopReview" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
-        <activity android:name=".match.PopOkMatching" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
-        <activity android:name=".match.PopRequestMatch" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
-        <activity android:name=".mypage.PopPasswdCheck" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity
+            android:name=".mypage.Popcalendar"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity
+            android:name=".match.PopCompl"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity
+            android:name=".mypage.PopReview"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity
+            android:name=".match.PopOkMatching"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity
+            android:name=".match.PopRequestMatch"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity
+            android:name=".mypage.PopPasswdCheck"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity android:name=".mypage.UpdateProfile" />
         <activity android:name=".Join" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

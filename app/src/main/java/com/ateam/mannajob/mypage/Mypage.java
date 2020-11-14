@@ -54,7 +54,6 @@ public class Mypage extends Fragment {
         initUI(rootView);
 
         listener.onTabSelected(AppConstants.FRAGMENT_CALENDAR,null);
-        Log.d("test", "onCreateView");
         return rootView;
     }
 
@@ -66,55 +65,4 @@ public class Mypage extends Fragment {
         });
         container = rootview.findViewById(R.id.container_mypage);
     }
-
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d("test", "onCreate");
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d("test", "onActivityCreated");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("test", "onStart");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("test", "onResume");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d("test", "onPause");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d("test", "onStop");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d("test", "onDestroyView");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d("test", "onDestroy");
-    }
-
 }

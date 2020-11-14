@@ -174,11 +174,10 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         }
         else if (position == AppConstants.FRAGMENT_CALENDAR){
             Log.d("가나다라","마바사");
-            schedule_f = new Schedule();
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_mypage, schedule_f).commit();
+            mypage_f.getChildFragmentManager().beginTransaction().replace(R.id.container_mypage, schedule_f).commit();
         }
         else if (position == AppConstants.FRAGMENT_MATCHINGMANGER){
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_mypage, mypageMatchManage_f).commit();
+            mypage_f.getChildFragmentManager().beginTransaction().replace(R.id.container_mypage, mypageMatchManage_f).commit();
         }
     }
 ////////////////////////////////////////////////////////////////////////////프로필 다운로드 스레드
