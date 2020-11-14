@@ -53,7 +53,7 @@ public class Mypage extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_mypage, container, false);
         initUI(rootView);
 
-        listener.onTabSelected(AppConstants.FRAGMENT_CALENDAR,null);
+
         return rootView;
     }
 
@@ -64,5 +64,11 @@ public class Mypage extends Fragment {
             startActivityForResult(intent,101);
         });
         container = rootview.findViewById(R.id.container_mypage);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        listener.onTabSelected(AppConstants.FRAGMENT_CALENDAR,null);
     }
 }

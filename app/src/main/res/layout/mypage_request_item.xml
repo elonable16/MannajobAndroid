@@ -65,7 +65,19 @@
                 android:gravity="right"
                 android:layout_weight="10"
                 android:orientation="horizontal">
-
+                <Button
+                    android:id="@+id/request_cancel_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/select_button"
+                    android:text="취소" />
+                <Button
+                    android:id="@+id/request_review_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/select_button"
+                    android:visibility="gone"
+                    android:text="리뷰" />
 
             </LinearLayout>
 
