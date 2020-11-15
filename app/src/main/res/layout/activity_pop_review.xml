@@ -22,18 +22,20 @@
 
 
 
-        <RadioGroup
-            android:id="@+id/review_radio_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:orientation="horizontal">
-
+                <RadioGroup
+                    android:id="@+id/review_radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
                 <RadioButton
                     android:id="@+id/review_like"
+                    android:checked="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -70,9 +72,9 @@
                     android:scaleX="0.7"
                     android:scaleY="0.7"
                     app:srcCompat="@drawable/dislike32" />
-
+                </RadioGroup>
             </LinearLayout>
-        </RadioGroup>
+
 
         <EditText
             android:id="@+id/review_contents"

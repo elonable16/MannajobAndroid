@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ateam.mannajob.AppConstants;
 import com.ateam.mannajob.R;
 import com.ateam.mannajob.recycleQna.QnADTO;
 
@@ -86,7 +87,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
         public void setItem(NoticeDTO item){ // 데이터화 화면 컴포넌트 연결
             n_num_item.setText(Integer.toString(item.getN_num()));
             n_subject_item.setText(item.getN_subject());
-            n_wdate_item.setText(item.getN_udate().toString());
+            n_wdate_item.setText(AppConstants.dateFormat2.format(item.getN_udate()));
         }
     }
 }

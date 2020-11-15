@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ateam.mannajob.AppConstants;
 import com.ateam.mannajob.R;
 
 import java.util.ArrayList;
@@ -90,7 +91,7 @@ public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> impl
             q_subject_item.setText(item.getQ_subject());
             q_category_item.setText(item.getQ_category());
             q_m_id_item.setText(item.getM_id());
-            q_wdate_item.setText(item.getQ_udate().toString());
+            q_wdate_item.setText(AppConstants.dateFormat2.format(item.getQ_udate()));
         }
     }
 }

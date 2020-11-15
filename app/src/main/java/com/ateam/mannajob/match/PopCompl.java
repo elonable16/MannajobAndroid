@@ -51,8 +51,14 @@ public class PopCompl extends Activity {
         compl_ok_btn.setOnClickListener(v -> {
             if(etc_chk ==1){
                 compl_contents = complE_txt.getText().toString();
+                if(compl_contents.equals("")) {
+                    Log.d("선택한 내용 :", "입력내용이 없습니다.");
+                }else {
+                    Log.d("선택한 내용 :", compl_contents);
+                }
+            }else {
+                Log.d("선택한 내용 :", compl_contents);
             }
-            Log.d("선택한 내용 :", compl_contents);
         });
         compl_cancel_btn.setOnClickListener(v -> {
             finish();
@@ -71,6 +77,7 @@ public class PopCompl extends Activity {
         complE_txt = findViewById(R.id.complE_txt);
         compl_ok_btn = findViewById(R.id.compl_ok_btn);
         compl_cancel_btn =findViewById(R.id.compl_cancel_btn);
+        compl_contents = complA.getText().toString();
 
     }
     RadioGroup.OnCheckedChangeListener groupClickListener = new RadioGroup.OnCheckedChangeListener() {
@@ -95,7 +102,6 @@ public class PopCompl extends Activity {
                 etc_chk = 1;
                 complE_txt.setVisibility(View.VISIBLE);
             }
-
         }
     };
 

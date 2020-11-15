@@ -3,7 +3,7 @@ package com.ateam.mannajob.recycleMatch;
 import java.io.Serializable;
 import java.util.Date;
 
-public class MatchDTO implements Serializable {
+public class BMatchDTO implements Serializable {
     private int b_num;
     private String b_category;
     private String m_id;
@@ -20,7 +20,7 @@ public class MatchDTO implements Serializable {
     private String profileImage;
     private String b_contents;
 
-    public MatchDTO(int b_num, String b_category, String m_id, String b_corp, String b_task, int b_price, String b_location, String b_stdate, String b_endate, String b_period, String b_state, String b_subject, Date b_wdate, String profileImage, String b_contents) {
+    public BMatchDTO(int b_num, String b_category, String m_id, String b_corp, String b_task, int b_price, String b_location, String b_stdate, String b_endate, String b_period, String b_state, String b_subject, Date b_wdate, String profileImage, String b_contents) {
         this.b_num = b_num;
         this.b_category = b_category;
         this.m_id = m_id;

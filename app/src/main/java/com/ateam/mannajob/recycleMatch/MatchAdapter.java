@@ -1,16 +1,14 @@
 package com.ateam.mannajob.recycleMatch;
 
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ateam.mannajob.ImageFormToServer;
+import com.ateam.mannajob.AppConstants;
 import com.ateam.mannajob.MainActivity;
 import com.ateam.mannajob.R;
 
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> implements OnMatchItemClickListener{
-    ArrayList<MatchDTO> items = new ArrayList<MatchDTO>();
+    ArrayList<BMatchDTO> items = new ArrayList<BMatchDTO>();
     OnMatchItemClickListener listener;
     int layoutType = 0;
 
@@ -34,7 +32,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MatchAdapter.ViewHolder viewHolder, int position) { // 뷰 홀더와 데이터를 연결시켜준다.
-        MatchDTO item = items.get(position);
+        BMatchDTO item = items.get(position);
         viewHolder.setItem(item);
     }
 
@@ -42,13 +40,13 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
     public int getItemCount() {
         return items.size();
     }
-    public void addItem(MatchDTO item){
+    public void addItem(BMatchDTO item){
         items.add(item);
     }
-    public void setItems(ArrayList<MatchDTO> items){
+    public void setItems(ArrayList<BMatchDTO> items){
         this.items = items;
     }
-    public MatchDTO getItem(int position){
+    public BMatchDTO getItem(int position){
         return items.get(position);
     }
 
@@ -104,7 +102,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
                 }
             });
         }
-        public void setItem(MatchDTO item){ // 데이터화 화면 컴포넌트 연결
+        public void setItem(BMatchDTO item){ // 데이터화 화면 컴포넌트 연결
             b_num.setText(Integer.toString(item.getB_num()));
             b_subject.setText(item.getB_subject());
             b_corp.setText(item.getB_corp());
@@ -112,7 +110,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
             b_price.setText(Integer.toString(item.getB_price()));
             b_m_id.setText(item.getM_id());
             b_location.setText(item.getB_location());
-            b_wdate.setText(item.getB_wdate().toString());
+            b_wdate.setText(AppConstants.dateFormat2.format(item.getB_wdate()));
             String imageName = item.getProfileImage();
             MainActivity activity = new MainActivity();
             activity.getImageToServer(image_profile ,imageName);

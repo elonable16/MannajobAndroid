@@ -78,7 +78,7 @@ public class MyApplication extends Application {
 
         request.setShouldCache(false);
         request.setRetryPolicy(new DefaultRetryPolicy(10*1000,0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        com.ateam.mannajob.MyApplication.requestQueue.add(request);
+        MyApplication.requestQueue.add(request);
         Log.d(TAG,"request sent : "+ requestCode);
         Log.d(TAG,"request url : "+ url);
     }

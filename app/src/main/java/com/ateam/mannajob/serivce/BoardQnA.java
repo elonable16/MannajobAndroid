@@ -1,66 +1,103 @@
 package com.ateam.mannajob.serivce;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.ateam.mannajob.AppConstants;
+import com.ateam.mannajob.MainActivity;
+import com.ateam.mannajob.OnFragmentItemSelectedListener;
 import com.ateam.mannajob.R;
+import com.ateam.mannajob.match.Matching;
+import com.ateam.mannajob.recycleMatch.BMatchDTO;
+import com.ateam.mannajob.recycleQna.QnADTO;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BoardQnA#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class BoardQnA extends Fragment {
+import java.util.Objects;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public BoardQnA() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BoardQnA.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BoardQnA newInstance(String param1, String param2) {
-        BoardQnA fragment = new BoardQnA();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+public class BoardQnA extends Fragment implements MainActivity.onKeyBackPressedListener{
+    TextView q_num;
+    TextView q_subject;
+    TextView q_category_detail;
+    TextView q_wdate;
+    TextView q_m_id;
+    TextView q_contents;
+    TextView qs_contents;
+    Button q_list_btn;
+    QnADTO qnADTO;
+    Bundle bundle;
+    Context context;
+    OnFragmentItemSelectedListener listener;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+        if(context instanceof  OnFragmentItemSelectedListener){
+            listener = (OnFragmentItemSelectedListener) context;
         }
     }
-
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        if(context!= null){
+            context=null;
+            listener = null;
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_board_qna, container, false);
+        ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.fragment_board_qna, container, false);
+
+        UIinit(rootview);
+        bundle = getArguments();
+        qnADTO = (QnADTO) bundle.getSerializable("item");
+        SetDisplay(qnADTO);
+        return  rootview;
+    }
+    private void UIinit(ViewGroup rootview){
+        q_num = rootview.findViewById(R.id.q_num);
+        q_subject = rootview.findViewById(R.id.q_subject);
+        q_category_detail = rootview.findViewById(R.id.q_category_detail);
+        q_wdate = rootview.findViewById(R.id.q_wdate);
+        q_m_id = rootview.findViewById(R.id.q_m_id);
+        q_contents = rootview.findViewById(R.id.q_contents);
+        qs_contents = rootview.findViewById(R.id.qs_contents);
+        q_list_btn = rootview.findViewById(R.id.q_list_btn);
+        q_list_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onTabSelected(AppConstants.FRAGMENT_SERVICE,null);
+            }
+        });
+    }
+    private void SetDisplay(QnADTO qnaDTO){
+        q_num.setText(Integer.toString(qnaDTO.getQ_num()));
+        q_subject.setText(qnaDTO.getQ_subject());
+        q_category_detail.setText(qnaDTO.getQ_category());
+        q_wdate.setText(qnaDTO.getQ_udate().toString());
+        q_m_id.setText(qnaDTO.getM_id());
+        q_contents.setText(qnaDTO.getQ_contents());
+        qs_contents.setText(qnaDTO.getQs_contents());
+    }
+    @Override
+    public void onBackKey() {
+        goToMain();
+    }
+
+    //프래그먼트 종료
+    private void goToMain(){
+        FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+        fragmentManager.beginTransaction().remove(BoardQnA.this).commit();
+        fragmentManager.popBackStack();
     }
 }

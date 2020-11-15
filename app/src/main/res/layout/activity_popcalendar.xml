@@ -29,12 +29,25 @@
             android:gravity="left"
             android:orientation="horizontal">
         </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/calendar_recyc"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            />
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/noMatchCount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="해당 날짜에는 일정이 없습니다."
+                android:paddingTop="20dp"
+                android:paddingBottom="30dp"
+                android:gravity="center"
+                android:visibility="gone"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/calendar_recyc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                />
+        </FrameLayout>
     </LinearLayout>
 </LinearLayout>

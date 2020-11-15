@@ -34,6 +34,7 @@
             android:paddingLeft="15dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/profile" />
@@ -109,7 +110,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/mypageEmail"
+                        android:id="@+id/mypageName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"

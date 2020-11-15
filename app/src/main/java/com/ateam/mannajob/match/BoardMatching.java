@@ -6,9 +6,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.transition.Transition;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.SurfaceControl;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,12 +21,14 @@ import android.widget.TextView;
 import com.ateam.mannajob.MainActivity;
 import com.ateam.mannajob.OnFragmentItemSelectedListener;
 import com.ateam.mannajob.R;
-import com.ateam.mannajob.recycleMatch.MatchDTO;
+import com.ateam.mannajob.recycleMatch.BMatchDTO;
+
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class BoardMatching extends Fragment {
+public class BoardMatching extends Fragment implements MainActivity.onKeyBackPressedListener{
 
     TextView b_subject_detail;
     TextView b_m_id_detail;
@@ -39,7 +44,7 @@ public class BoardMatching extends Fragment {
     Button b_request_btn;
     ImageView compl_btn;
     Bundle bundle;
-    MatchDTO matchDTO;
+    BMatchDTO BMatchDTO;
 
     Context context;
     OnFragmentItemSelectedListener listener;
@@ -67,20 +72,21 @@ public class BoardMatching extends Fragment {
         ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.fragment_boardmatching, container, false);
 
         UIinit(rootview);
+
         bundle = getArguments();
-        matchDTO = (MatchDTO) bundle.getSerializable("item");
-        Log.d("받은 데이터 : ",matchDTO.getB_contents());
-        SetDisplay(matchDTO);
+        BMatchDTO = (BMatchDTO) bundle.getSerializable("item");
+        Log.d("받은 데이터 : ", BMatchDTO.getB_contents());
+        SetDisplay(BMatchDTO);
 
         b_request_btn.setOnClickListener(v -> {
             Intent intent = new Intent(context,PopRequestMatch.class);
-            intent.putExtra("b_num",matchDTO.getB_num());
+            intent.putExtra("b_num", BMatchDTO.getB_num());
             startActivity(intent);
         });
         compl_btn.setOnClickListener(v -> {
             Intent intent = new Intent(context,PopCompl.class);
-            intent.putExtra("b_num",matchDTO.getB_num());
-            intent.putExtra("m_id",matchDTO.getM_id());
+            intent.putExtra("b_num", BMatchDTO.getB_num());
+            intent.putExtra("m_id", BMatchDTO.getM_id());
             startActivity(intent);
         });
         return rootview;
@@ -101,18 +107,29 @@ public class BoardMatching extends Fragment {
         b_wdate_detail = rootview.findViewById(R.id.b_wdate_detail);
         profile_image = rootview.findViewById(R.id.b_profile_detail);
     }
-    private void SetDisplay(MatchDTO matchDTO){
-        b_subject_detail.setText(matchDTO.getB_subject());
-        b_m_id_detail.setText(matchDTO.getM_id());
-        b_price_detail.setText(Integer.toString(matchDTO.getB_price()));
-        b_corp_detail.setText(matchDTO.getB_corp());
-        b_task_detail.setText(matchDTO.getB_task());
-        b_stdate_detail.setText(matchDTO.getB_stdate());
-        b_endate_detail.setText(matchDTO.getB_endate());
-        b_period_detail.setText(matchDTO.getB_period());
-        b_e_intro.setText(matchDTO.getB_contents());
-        b_wdate_detail.setText(matchDTO.getB_wdate().toString());
+    private void SetDisplay(BMatchDTO BMatchDTO){
+        b_subject_detail.setText(BMatchDTO.getB_subject());
+        b_m_id_detail.setText(BMatchDTO.getM_id());
+        b_price_detail.setText(Integer.toString(BMatchDTO.getB_price()));
+        b_corp_detail.setText(BMatchDTO.getB_corp());
+        b_task_detail.setText(BMatchDTO.getB_task());
+        b_stdate_detail.setText(BMatchDTO.getB_stdate());
+        b_endate_detail.setText(BMatchDTO.getB_endate());
+        b_period_detail.setText(BMatchDTO.getB_period());
+        b_e_intro.setText(BMatchDTO.getB_contents());
+        b_wdate_detail.setText(BMatchDTO.getB_wdate().toString());
         MainActivity activity = new MainActivity();
-        activity.getImageToServer(profile_image,matchDTO.getProfileImage());
+        activity.getImageToServer(profile_image, BMatchDTO.getProfileImage());
+    }
+    @Override
+    public void onBackKey() {
+        goToMain();
+    }
+
+    //프래그먼트 종료
+    private void goToMain(){
+        FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+        fragmentManager.beginTransaction().remove(BoardMatching.this).commit();
+        fragmentManager.popBackStack();
     }
 }

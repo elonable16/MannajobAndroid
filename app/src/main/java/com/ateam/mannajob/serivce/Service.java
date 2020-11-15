@@ -1,26 +1,23 @@
 package com.ateam.mannajob.serivce;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.ateam.mannajob.AppConstants;
+import com.ateam.mannajob.MainActivity;
 import com.ateam.mannajob.OnFragmentItemSelectedListener;
 import com.ateam.mannajob.R;
-import com.ateam.mannajob.mypage.PopPasswdCheck;
-import com.ateam.mannajob.recycleMatch.MatchAdapter;
-import com.ateam.mannajob.recycleMatch.MatchDTO;
+import com.ateam.mannajob.match.Matching;
 import com.ateam.mannajob.recycleNotice.NoticeAdapter;
 import com.ateam.mannajob.recycleNotice.NoticeDTO;
 import com.ateam.mannajob.recycleNotice.OnNoticeItemClickListener;
@@ -31,11 +28,12 @@ import com.ateam.mannajob.recycleQna.QnADTO;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import lib.kingja.switchbutton.SwitchMultiButton;
 
 
-public class Service extends Fragment {
+public class Service extends Fragment implements MainActivity.onKeyBackPressedListener {
     Context context;
     RecyclerView serviceRecyc;
     NoticeAdapter noticeAdapter;
@@ -138,6 +136,17 @@ public class Service extends Fragment {
                 listener.onTabSelected(AppConstants.FRAGMENT_BOARD_QNA,item);
             }
         });
+    }
+    @Override
+    public void onBackKey() {
+        goToMain();
+    }
+
+    //프래그먼트 종료
+    private void goToMain(){
+        FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+        fragmentManager.beginTransaction().remove(Service.this).commit();
+        fragmentManager.popBackStack();
     }
 
 }

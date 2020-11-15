@@ -3,8 +3,8 @@ package com.ateam.mannajob;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,19 +12,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.ateam.mannajob.match.BoardMatching;
 import com.ateam.mannajob.match.Matching;
 import com.ateam.mannajob.mypage.Mypage;
 import com.ateam.mannajob.mypage.MypageMatchManage;
 import com.ateam.mannajob.mypage.Schedule;
-import com.ateam.mannajob.recycleMatch.MatchDTO;
+import com.ateam.mannajob.recycleMatch.BMatchDTO;
 import com.ateam.mannajob.recycleNotice.NoticeDTO;
 import com.ateam.mannajob.recycleQna.QnADTO;
 import com.ateam.mannajob.serivce.BoardNotice;
@@ -39,11 +37,14 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.zip.Inflater;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Stack;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity implements AutoPermissionsListener,OnFragmentItemSelectedListener, ImageFormToServer, Runnable {
+public class MainActivity extends AppCompatActivity implements AutoPermissionsListener,OnFragmentItemSelectedListener, ImageFormToServer, Runnable,MyApplication.OnResponseListener,ServerController {
     private static final String TAG= "MainActivity";
     private final MyHandler handler = new MyHandler(this);
     OAuthLogin LoginState = OAuthLogin.getInstance();
@@ -112,12 +113,13 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 switch (item.getItemId()) {
                     case R.id.tab1:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container_main, matching_f).commit();
+
                         return true;
                     case R.id.tab2:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_main, service_f).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container_main, service_f).addToBackStack(null).commit();
                         return true;
                     case R.id.tab3:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_main, mypage_f).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container_main, mypage_f).addToBackStack(null).commit();
 
                         return true;
 //                    case R.id.tab3:
@@ -155,25 +157,24 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         } else if (position == AppConstants.FRAGMENT_MYPAGE) {
             bottomNavigation.setSelectedItemId(R.id.tab3);
         } else if (position == AppConstants.FRAGMENT_BOARD_MATCH){
-            MatchDTO matchDTO = (MatchDTO)item;
-            bundle.putSerializable("item", matchDTO);
+            BMatchDTO BMatchDTO = (BMatchDTO)item;
+            bundle.putSerializable("item", BMatchDTO);
             boardMatching_f.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_main, boardMatching_f).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_main, boardMatching_f).addToBackStack(null).commit();
         }
         else if (position == AppConstants.FRAGMENT_BOARD_NOTICE){
             NoticeDTO noticeDTO = (NoticeDTO)item;
             bundle.putSerializable("item", noticeDTO);
             boardNotice_f.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_main, boardNotice_f).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_main, boardNotice_f).addToBackStack(null).commit();
         }
         else if (position == AppConstants.FRAGMENT_BOARD_QNA){
             QnADTO qnaDTO = (QnADTO) item;
             bundle.putSerializable("item", qnaDTO);
             boardQnA_f.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_main, boardQnA_f).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_main, boardQnA_f).addToBackStack(null).commit();
         }
         else if (position == AppConstants.FRAGMENT_CALENDAR){
-            Log.d("가나다라","마바사");
             mypage_f.getChildFragmentManager().beginTransaction().replace(R.id.container_mypage, schedule_f).commit();
         }
         else if (position == AppConstants.FRAGMENT_MATCHINGMANGER){
@@ -185,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     public void run() {
         URL url = null;
         try {
-            url = new URL("http://192.168.0.225:8080/resources/img/productimg/"+profile_file_name);
+            url = new URL("http://192.168.0.225:8080/resources/images/member_img/"+profile_file_name);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.connect();
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -239,11 +240,57 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
     @Override
     public void onDenied(int i, String[] permissions) {
-        Toast.makeText(this, "permissions denied : " + permissions.length, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "permissions denied : " + permissions.length, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onGranted(int i, String[] permissions) {
-        Toast.makeText(this, "permissions granted : " + permissions.length, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "permissions granted : " + permissions.length, Toast.LENGTH_SHORT).show();
+    }
+    ///////////////////////////////////////fragment 앱종료 방지///////////////////////////////////////
+    public interface onKeyBackPressedListener {
+        void onBackKey();
+    }
+    private onKeyBackPressedListener mOnKeyBackPressedListener;
+    private long lastTimeBackPressed;
+    public void setOnKeyBackPressedListener(onKeyBackPressedListener listener) {
+        mOnKeyBackPressedListener = listener;
+    }
+    public Stack<onKeyBackPressedListener> mFragmentBackStack = new Stack<>();
+
+    @Override public void onBackPressed() {
+        List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
+        for(Fragment fragment : fragmentList){
+            if(fragment instanceof onKeyBackPressedListener){
+                ((onKeyBackPressedListener)fragment).onBackKey();
+                return;
+            }
+        }
+        //두 번 클릭시 어플 종료
+        if(System.currentTimeMillis() - lastTimeBackPressed < 1500){
+            finish();
+            return;
+        }
+        lastTimeBackPressed = System.currentTimeMillis();
+        Toast.makeText(this,"'뒤로' 버튼을 한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////// 서버통신
+
+    @Override
+    public void ServerSend(String cmd, HashMap<String,String> params) {
+//        if(cmd.equals("Login")){
+//            login(params);
+//        }
+    }
+    public void  login(Map<String,String> params){
+//        String url = AppConstants.URL; // /이후로 작성
+//        url += "/logincheck";
+//        MyApplication.send(AppConstants.LOGIN, Request.Method.POST,url,params,this);
+    }
+
+    @Override
+    public void processResponse(int requestCode, int responseCode, String response) {
+
     }
 }

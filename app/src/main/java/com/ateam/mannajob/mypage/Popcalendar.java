@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ateam.mannajob.R;
@@ -24,6 +26,7 @@ public class Popcalendar extends Activity {
     CalendarAdapter adapter;
     CalendarDTO calendarDTO;
     Calendar calendar_date;
+    TextView noMatchCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class Popcalendar extends Activity {
     }
 
     public void UiInit(){
+        noMatchCount = findViewById(R.id.noMatchCount);
         scheduleRecyc = findViewById(R.id.calendar_recyc);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         scheduleRecyc.setLayoutManager(layoutManager);
@@ -48,8 +52,11 @@ public class Popcalendar extends Activity {
         adapter.setItems(list);
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();
-        list.add(new CalendarDTO(1, "admin","010-0000-0000", now, "03:00", "청주시 오창읍"));
+//        list.add(new CalendarDTO(1, "admin","010-0000-0000", now, "03:00", "청주시 오창읍"));
 
         scheduleRecyc.setAdapter(adapter);
+        if(adapter.getItemCount()==0){
+            noMatchCount.setVisibility(View.VISIBLE);
+        }
     }
 }

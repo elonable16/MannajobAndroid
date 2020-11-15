@@ -24,5 +24,17 @@ public class AppConstants {
     public static final int FRAGMENT_BOARD_NOTICE = 6;
     public static final int FRAGMENT_CALENDAR = 7;
     public static final int FRAGMENT_MATCHINGMANGER = 8;
+    public static final int ADAPTER_BTN_OK = 1001;
+    public static final int ADAPTER_BTN_REVIEW = 1002;
+    public static final int ADAPTER_BTN_CANCEL = 1003;
+    public static final String CANCEL = "취소";
+    public static final String PROCEEDING = "대기";
+    public static final String FINISH = "완료";
+    public static final String REQUEST = "요청";
+    public static final String REJECT = "거절";
+    public static final String URL = "http://192.168.0.225:8080/";
+
+
+    public static final int LOGINCHECK = 101;
 
 }

@@ -5,17 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="4dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginRight="4dp"
-    android:layout_marginBottom="4dp"
+    android:layout_marginTop="1dp"
+    android:layout_marginBottom="1dp"
     app:cardBackgroundColor="#ffffffff"
-    app:cardCornerRadius="10dp">
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/textlines2"
         android:orientation="horizontal"
         android:visibility="visible">
 
@@ -39,47 +38,38 @@
                     android:hint="0001" />
 
                 <TextView
-                    android:id="@+id/b_subject"
+                    android:id="@+id/b_subject_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="00기업 현직자 멘토링 구합니다"
                     android:paddingLeft="10dp" />
 
-                <TextView
-                    android:id="@+id/b_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:text="접수중"
-                    android:textColor="@color/MYOrange"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:gravity="right"
-                android:layout_weight="10"
-                android:orientation="horizontal">
-
                 <Button
                     android:id="@+id/b_match_end_btn"
                     android:layout_width="50dp"
-                    android:layout_height="30dp"
+                    android:layout_height="20dp"
                     android:background="@drawable/select_button"
                     android:text="완료" />
 
                 <Button
                     android:id="@+id/review_btn"
                     android:layout_width="50dp"
-                    android:layout_height="30dp"
+                    android:layout_height="20dp"
                     android:background="@drawable/select_button"
-                    android:visibility="gone"
-                    android:text="리뷰" />
+                    android:text="리뷰"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/b_state_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="접수중"
+                    android:textColor="@color/MYOrange"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
 
             </LinearLayout>
 
