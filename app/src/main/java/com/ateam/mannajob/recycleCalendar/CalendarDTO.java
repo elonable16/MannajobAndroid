@@ -6,11 +6,11 @@ public class CalendarDTO {
     private int b_num;
     private String m_id;
     private String phone;
-    private Date mat_stdate;
+    private String mat_stdate;
     private String mat_hour;
     private String b_location;
 
-    public CalendarDTO(int b_num, String m_id, String phone, Date mat_stdate, String mat_hour, String b_location) {
+    public CalendarDTO(int b_num, String m_id, String phone, String mat_stdate, String mat_hour, String b_location) {
         this.b_num = b_num;
         this.m_id = m_id;
         this.phone = phone;
@@ -43,11 +43,11 @@ public class CalendarDTO {
         this.phone = phone;
     }
 
-    public Date getMat_stdate() {
+    public String getMat_stdate() {
         return mat_stdate;
     }
 
-    public void setMat_stdate(Date mat_stdate) {
+    public void setMat_stdate(String mat_stdate) {
         this.mat_stdate = mat_stdate;
     }
 

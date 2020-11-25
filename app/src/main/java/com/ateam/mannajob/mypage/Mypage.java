@@ -16,25 +16,35 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.ateam.mannajob.AppConstants;
 import com.ateam.mannajob.MainActivity;
+import com.ateam.mannajob.MyApplication;
 import com.ateam.mannajob.OnFragmentItemSelectedListener;
 import com.ateam.mannajob.R;
+import com.ateam.mannajob.ServerController;
 import com.ateam.mannajob.match.Matching;
+import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import lib.kingja.switchbutton.SwitchMultiButton;
 
 
-public class Mypage extends Fragment implements MainActivity.onKeyBackPressedListener {
+public class Mypage extends Fragment implements MainActivity.onKeyBackPressedListener, MyApplication.OnResponseListener, ServerController {
     CircleImageView profileImage;
     TextView mypageID;
     TextView mypageName;
     TextView mypagePhone;
     TextView mypageEmail;
+    MemberDTO myprofile;
 
 
     Context context;
@@ -67,6 +77,9 @@ public class Mypage extends Fragment implements MainActivity.onKeyBackPressedLis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_mypage, container, false);
+
+        ServerSend("MyProfile",null);
+
         initUI(rootView);
 
 
@@ -80,7 +93,6 @@ public class Mypage extends Fragment implements MainActivity.onKeyBackPressedLis
         mypageEmail= rootview.findViewById(R.id.mypage_email);
         profileImage = rootview.findViewById(R.id.profile_image);
         update_profile_btn = rootview.findViewById(R.id.update_profile_btn);
-        SettingDisplay();
         update_profile_btn.setOnClickListener(v -> {
             Intent intent = new Intent(context,PopPasswdCheck.class);
             startActivityForResult(intent,101);
@@ -101,12 +113,12 @@ public class Mypage extends Fragment implements MainActivity.onKeyBackPressedLis
 
     }
     public void SettingDisplay(){
-        mypageID.setText("");
-        mypageName.setText("");
-        mypagePhone.setText("");
-        mypageEmail.setText("");
+        mypageID.setText(myprofile.getM_id());
+        mypageName.setText(myprofile.getM_name());
+        mypagePhone.setText(myprofile.getM_phone());
+        mypageEmail.setText(myprofile.getM_email());
         MainActivity activity = new MainActivity();
-//        activity.getImageToServer(profileImage, .getProfileImage());
+        activity.getImageToServer(profileImage, myprofile.getStored_file_name());
     }
 
     @Override
@@ -129,5 +141,37 @@ public class Mypage extends Fragment implements MainActivity.onKeyBackPressedLis
         FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
         fragmentManager.beginTransaction().remove(Mypage.this).commit();
         fragmentManager.popBackStack();
+    }
+
+
+    @Override
+    public void processResponse(int requestCode, int responseCode, String response) {
+        Gson gson;
+        Type type;
+        if(responseCode==200){
+            if (requestCode == AppConstants.MYPROFILE) {
+                gson = new Gson();
+                myprofile = gson.fromJson(response, MemberDTO.class);
+                if(myprofile==null){
+                    Toast.makeText(context,"로그인이 필요합니다.",Toast.LENGTH_SHORT).show();
+                    listener.onTabSelected(AppConstants.FRAGMENT_MATCH,null);
+                    return;
+                }
+                SettingDisplay();
+            }else{
+                System.out.println("unknown request code :" + requestCode);
+            }
+        }else{
+            System.out.println("failure request code :" + requestCode);
+        }
+    }
+
+    @Override
+    public void ServerSend(String cmd, Map<String, String> params) {
+        String url =AppConstants.URL;
+        if(cmd.equals("MyProfile")){
+            url +="rest/myprofile.json";
+            MyApplication.send(AppConstants.MYPROFILE, Request.Method.GET,url,params,this);
+        }
     }
 }

@@ -8,13 +8,12 @@ public class QnADTO implements Serializable {
     private String q_category;
     private String m_id;
     private String q_contents;
-    private Date q_udate;
+    private String q_udate;
     private String q_subject;
     private String qs_contents;
-    private Date qs_udate;
+    private String qs_udate;
 
-
-    public QnADTO(int q_num, String q_category, String m_id, String q_contents, Date q_udate, String q_subject, String qs_contents, Date qs_udate) {
+    public QnADTO(int q_num, String q_category, String m_id, String q_contents, String q_udate, String q_subject, String qs_contents, String qs_udate) {
         this.q_num = q_num;
         this.q_category = q_category;
         this.m_id = m_id;
@@ -57,11 +56,11 @@ public class QnADTO implements Serializable {
         this.q_contents = q_contents;
     }
 
-    public Date getQ_udate() {
+    public String getQ_udate() {
         return q_udate;
     }
 
-    public void setQ_udate(Date q_udate) {
+    public void setQ_udate(String q_udate) {
         this.q_udate = q_udate;
     }
 
@@ -81,11 +80,11 @@ public class QnADTO implements Serializable {
         this.qs_contents = qs_contents;
     }
 
-    public Date getQs_udate() {
+    public String getQs_udate() {
         return qs_udate;
     }
 
-    public void setQs_udate(Date qs_udate) {
+    public void setQs_udate(String qs_udate) {
         this.qs_udate = qs_udate;
     }
 }

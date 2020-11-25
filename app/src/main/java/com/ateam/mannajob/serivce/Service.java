@@ -12,34 +12,48 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.android.volley.Request;
 import com.ateam.mannajob.AppConstants;
 import com.ateam.mannajob.MainActivity;
+import com.ateam.mannajob.MyApplication;
 import com.ateam.mannajob.OnFragmentItemSelectedListener;
 import com.ateam.mannajob.R;
+import com.ateam.mannajob.ServerController;
 import com.ateam.mannajob.match.Matching;
+import com.ateam.mannajob.recycleMatch.BMatchDTO;
 import com.ateam.mannajob.recycleNotice.NoticeAdapter;
 import com.ateam.mannajob.recycleNotice.NoticeDTO;
 import com.ateam.mannajob.recycleNotice.OnNoticeItemClickListener;
 import com.ateam.mannajob.recycleQna.OnQnAItemClickListener;
 import com.ateam.mannajob.recycleQna.QnAAdapter;
 import com.ateam.mannajob.recycleQna.QnADTO;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import lib.kingja.switchbutton.SwitchMultiButton;
 
 
-public class Service extends Fragment implements MainActivity.onKeyBackPressedListener {
+public class Service extends Fragment implements MainActivity.onKeyBackPressedListener, MyApplication.OnResponseListener, ServerController {
     Context context;
     RecyclerView serviceRecyc;
     NoticeAdapter noticeAdapter;
         QnAAdapter qnAAdapter;
     OnFragmentItemSelectedListener listener;
     SwitchMultiButton switchMultiButton;
+    EditText search_txt;
+    Button search_btn;
+
     int switchpostion;
     @Override
     public void onAttach(@NonNull Context context) {
@@ -67,8 +81,10 @@ public class Service extends Fragment implements MainActivity.onKeyBackPressedLi
         initUI(rootView);
         if (switchpostion == 0) {
             showNoticeList();
+            ServerSend("Notice",null);
         } else if (switchpostion == 1) {
             showQnAList();
+            ServerSend("QnA",null);
         }
         return rootView;
     }
@@ -78,12 +94,12 @@ public class Service extends Fragment implements MainActivity.onKeyBackPressedLi
         switchMultiButton.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {
             @Override
             public void onSwitch(int position, String tabText) {
-                if (position == 0) {
+                if(position ==0){
                     showNoticeList();
-                    serviceRecyc.setAdapter(noticeAdapter);
-                } else if (position == 1) {
+                    ServerSend("Notice",null);
+                }else if(position == 1){
                     showQnAList();
-                    serviceRecyc.setAdapter(qnAAdapter);
+                    ServerSend("QnA",null);
                 }
                 switchpostion = position;
             }
@@ -91,21 +107,25 @@ public class Service extends Fragment implements MainActivity.onKeyBackPressedLi
         serviceRecyc = rootview.findViewById(R.id.service_recyc);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         serviceRecyc.setLayoutManager(layoutManager);
+        search_txt= rootview.findViewById(R.id.search_service_txt);
+        search_btn = rootview.findViewById(R.id.search_service_btn);
+
+        search_btn.setOnClickListener(v -> {
+            Map<String,String> params = new HashMap<String,String>();
+            if (switchpostion == 0) {
+                params.put("n_subject",search_txt.getText().toString());
+                ServerSend("NoticeSearch",params);
+            } else if (switchpostion == 1) {
+                params.put("q_subject",search_txt.getText().toString());
+                ServerSend("QnASearch",params);
+            }
+        });
     }
 
     public void showNoticeList(){
-        ArrayList<NoticeDTO> list = new ArrayList<>();
+
         noticeAdapter = new NoticeAdapter();
-        noticeAdapter.setItems(list);
-        Calendar calendar = Calendar.getInstance();
-        Date now = calendar.getTime();
-        list.add(new NoticeDTO(1, "이용해주셔서 감사합니다.", "admin", "공지합니다.", 1234, now));
-        list.add(new NoticeDTO(1, "이용해주셔서 감사합니다.", "admin", "공지합니다.", 1234, now));
-        list.add(new NoticeDTO(1, "이용해주셔서 감사합니다.", "admin", "공지합니다.", 1234, now));
-        list.add(new NoticeDTO(1, "이용해주셔서 감사합니다.", "admin", "공지합니다.", 1234, now));
-        list.add(new NoticeDTO(1, "이용해주셔서 감사합니다.", "admin", "공지합니다.", 1234, now));
-        list.add(new NoticeDTO(1, "이용해주셔서 감사합니다.", "admin", "공지합니다.", 1234, now));
-        serviceRecyc.setAdapter(noticeAdapter);
+
         noticeAdapter.setOnItemClickListner(new OnNoticeItemClickListener() {
             @Override
             public void onItemClick(NoticeAdapter.ViewHolder viewHolder, View view, int position) {
@@ -116,18 +136,8 @@ public class Service extends Fragment implements MainActivity.onKeyBackPressedLi
     }
 
     public void showQnAList() {
-        ArrayList<QnADTO> list = new ArrayList<>();
+
         qnAAdapter = new QnAAdapter();
-        qnAAdapter.setItems(list);
-        Calendar calendar = Calendar.getInstance();
-        Date now = calendar.getTime();
-        list.add(new QnADTO(1, "기타", "lion", "질문내용은 이것입니다.", now, "질문있습니다.","답변내용입니다.",now));
-        list.add(new QnADTO(1, "기타", "lion", "질문내용은 이것입니다.", now, "질문있습니다.","답변내용입니다.",now));
-        list.add(new QnADTO(1, "기타", "lion", "질문내용은 이것입니다.", now, "질문있습니다.","답변내용입니다.",now));
-        list.add(new QnADTO(1, "기타", "lion", "질문내용은 이것입니다.", now, "질문있습니다.","답변내용입니다.",now));
-        list.add(new QnADTO(1, "기타", "lion", "질문내용은 이것입니다.", now, "질문있습니다.","답변내용입니다.",now));
-        list.add(new QnADTO(1, "기타", "lion", "질문내용은 이것입니다.", now, "질문있습니다.","답변내용입니다.",now));
-        serviceRecyc.setAdapter(qnAAdapter);
 
         qnAAdapter.setOnItemClickListner(new OnQnAItemClickListener() {
             @Override
@@ -149,4 +159,51 @@ public class Service extends Fragment implements MainActivity.onKeyBackPressedLi
         fragmentManager.popBackStack();
     }
 
+    @Override
+    public void processResponse(int requestCode, int responseCode, String response) {
+        Gson gson;
+        Type type;
+        if(responseCode==200){
+            if(requestCode == AppConstants.NOTICEDATA){
+                gson=  new Gson();
+                type = new TypeToken<ArrayList<NoticeDTO>>(){}.getType();
+                ArrayList<NoticeDTO> list = gson.fromJson(response, type);
+                noticeAdapter.setItems(list);
+
+                serviceRecyc.setAdapter(noticeAdapter);
+                noticeAdapter.notifyDataSetChanged();
+
+            }else if(requestCode == AppConstants.QNADATA){
+                gson=  new Gson();
+                type = new TypeToken<ArrayList<QnADTO>>(){}.getType();
+                ArrayList<QnADTO> list = gson.fromJson(response, type);
+                qnAAdapter.setItems(list);
+
+                serviceRecyc.setAdapter(qnAAdapter);
+                qnAAdapter.notifyDataSetChanged();
+            }else{
+                System.out.println("unknown request code :" + requestCode);
+            }
+        }else{
+            System.out.println("failure request code :" + requestCode);
+        }
+    }
+
+    @Override
+    public void ServerSend(String cmd, Map<String, String> params) {
+        String url =AppConstants.URL;
+        if(cmd.equals("Notice")){
+            url +="rest/notice/list.json";
+            MyApplication.send(AppConstants.NOTICEDATA, Request.Method.GET,url,params,this);
+        }else if(cmd.equals("QnA")){
+            url +="rest/qna/list.json";
+            MyApplication.send(AppConstants.QNADATA,Request.Method.GET,url,params,this);
+        }else if(cmd.equals("NoticeSearch")){
+            url +="rest/notice/search.json";
+            MyApplication.send(AppConstants.NOTICEDATA,Request.Method.POST,url,params,this);
+        }else if(cmd.equals("QnASearch")){
+            url +="rest/qna/search.json";
+            MyApplication.send(AppConstants.QNADATA,Request.Method.POST,url,params,this);
+        }
+    }
 }

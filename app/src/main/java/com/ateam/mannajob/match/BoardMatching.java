@@ -17,18 +17,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.ateam.mannajob.AppConstants;
 import com.ateam.mannajob.MainActivity;
+import com.ateam.mannajob.MyApplication;
 import com.ateam.mannajob.OnFragmentItemSelectedListener;
 import com.ateam.mannajob.R;
+import com.ateam.mannajob.ServerController;
 import com.ateam.mannajob.recycleMatch.BMatchDTO;
 
+import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class BoardMatching extends Fragment implements MainActivity.onKeyBackPressedListener{
+public class BoardMatching extends Fragment implements MainActivity.onKeyBackPressedListener, MyApplication.OnResponseListener, ServerController {
 
     TextView b_subject_detail;
     TextView b_m_id_detail;
@@ -79,15 +85,12 @@ public class BoardMatching extends Fragment implements MainActivity.onKeyBackPre
         SetDisplay(BMatchDTO);
 
         b_request_btn.setOnClickListener(v -> {
-            Intent intent = new Intent(context,PopRequestMatch.class);
-            intent.putExtra("b_num", BMatchDTO.getB_num());
-            startActivity(intent);
+            ServerSend("matchrequest",null);
+//
         });
         compl_btn.setOnClickListener(v -> {
-            Intent intent = new Intent(context,PopCompl.class);
-            intent.putExtra("b_num", BMatchDTO.getB_num());
-            intent.putExtra("m_id", BMatchDTO.getM_id());
-            startActivity(intent);
+            ServerSend("compl",null);
+//
         });
         return rootview;
     }
@@ -131,5 +134,49 @@ public class BoardMatching extends Fragment implements MainActivity.onKeyBackPre
         FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
         fragmentManager.beginTransaction().remove(BoardMatching.this).commit();
         fragmentManager.popBackStack();
+    }
+
+    @Override
+    public void processResponse(int requestCode, int responseCode, String response) {
+
+
+        if(responseCode==200){
+            if (requestCode == AppConstants.GOMATCHREQUSET) {
+                if(response.equals("2")){
+                    Toast.makeText(context,"로그인이 필요합니다",Toast.LENGTH_SHORT).show();
+                }else if(response.equals("1")){
+                    Intent intent = new Intent(context,PopRequestMatch.class);
+                    intent.putExtra("b_num", BMatchDTO.getB_num());
+                    startActivity(intent);
+                }
+            }else if(requestCode == AppConstants.GOCOMPL){
+                if(response.equals("2")){
+                    Toast.makeText(context,"로그인이 필요합니다",Toast.LENGTH_SHORT).show();
+                }else if(response.equals("1")){
+                    Intent intent = new Intent(context,PopCompl.class);
+                    intent.putExtra("b_num", Integer.toString(BMatchDTO.getB_num()));
+                    intent.putExtra("m_id", BMatchDTO.getM_id());
+                    startActivity(intent);
+                }
+            }else{
+                System.out.println("unknown request code :" + requestCode);
+            }
+        }else{
+            System.out.println("failure request code :" + requestCode);
+        }
+    }
+
+    @Override
+    public void ServerSend(String cmd, Map<String, String> params) {
+        String url =AppConstants.URL;
+        if(cmd.equals("matchrequest")) {
+            url += "rest/check.json";
+            Log.d("url:", url);
+            MyApplication.send(AppConstants.GOMATCHREQUSET, Request.Method.GET, url, params, this);
+        }else if(cmd.equals("compl")){
+            url += "rest/check.json";
+            Log.d("url:", url);
+            MyApplication.send(AppConstants.GOCOMPL, Request.Method.GET, url, params, this);
+        }
     }
 }

@@ -89,9 +89,29 @@ public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> impl
         public void setItem(QnADTO item){ // 데이터화 화면 컴포넌트 연결
             q_num_item.setText(Integer.toString(item.getQ_num()));
             q_subject_item.setText(item.getQ_subject());
-            q_category_item.setText(item.getQ_category());
+            String category;
+            switch (item.getQ_category()) {
+                case "B":
+                    q_category_item.setText(R.string.qnacategoryb);
+                    break;
+                case "C":
+                    q_category_item.setText(R.string.qnacategoryc);
+                    break;
+                case "D":
+                    q_category_item.setText(R.string.qnacategoryd);
+                    break;
+                case "E":
+                    q_category_item.setText(R.string.qnacategorye);
+                    break;
+                case "Q":
+                    q_category_item.setText(R.string.qnacategoryq);
+                    break;
+                case "X":
+                    q_category_item.setText(R.string.qnacategoryx);
+                    break;
+            }
             q_m_id_item.setText(item.getM_id());
-            q_wdate_item.setText(AppConstants.dateFormat2.format(item.getQ_udate()));
+            q_wdate_item.setText(item.getQ_udate());
         }
     }
 }

@@ -83,7 +83,26 @@ public class BoardQnA extends Fragment implements MainActivity.onKeyBackPressedL
     private void SetDisplay(QnADTO qnaDTO){
         q_num.setText(Integer.toString(qnaDTO.getQ_num()));
         q_subject.setText(qnaDTO.getQ_subject());
-        q_category_detail.setText(qnaDTO.getQ_category());
+        switch (qnaDTO.getQ_category()) {
+            case "B":
+                q_category_detail.setText(R.string.qnacategoryb);
+                break;
+            case "C":
+                q_category_detail.setText(R.string.qnacategoryc);
+                break;
+            case "D":
+                q_category_detail.setText(R.string.qnacategoryd);
+                break;
+            case "E":
+                q_category_detail.setText(R.string.qnacategorye);
+                break;
+            case "Q":
+                q_category_detail.setText(R.string.qnacategoryq);
+                break;
+            case "X":
+                q_category_detail.setText(R.string.qnacategoryx);
+                break;
+        };
         q_wdate.setText(qnaDTO.getQ_udate().toString());
         q_m_id.setText(qnaDTO.getM_id());
         q_contents.setText(qnaDTO.getQ_contents());

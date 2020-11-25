@@ -16,9 +16,16 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.ateam.mannajob.AppConstants;
+import com.ateam.mannajob.MyApplication;
 import com.ateam.mannajob.R;
+import com.ateam.mannajob.ServerController;
 
-public class PopCompl extends Activity {
+import java.util.HashMap;
+import java.util.Map;
+
+public class PopCompl extends Activity implements MyApplication.OnResponseListener, ServerController {
     TextView compl_id;
     RadioGroup compl_radio_group;
     RadioButton complA;
@@ -46,17 +53,26 @@ public class PopCompl extends Activity {
         Intent intent = getIntent();
         b_num = intent.getExtras().getString("b_num");
         m_id = intent.getExtras().getString("m_id");
+        Log.d("b_num",b_num);
+        Log.d("m_id",m_id);
 
         compl_id.setText(m_id);
         compl_ok_btn.setOnClickListener(v -> {
             if(etc_chk ==1){
                 compl_contents = complE_txt.getText().toString();
                 if(compl_contents.equals("")) {
-                    Log.d("선택한 내용 :", "입력내용이 없습니다.");
+                    Toast.makeText(getApplicationContext()," 내용을 입력하지 않았습니다.",Toast.LENGTH_SHORT).show();
                 }else {
+
                     Log.d("선택한 내용 :", compl_contents);
                 }
             }else {
+                Map<String,String> params = new HashMap<String,String>();
+                params.put("board_num",b_num);
+                params.put("m_id",m_id);
+                params.put("c_category","B");
+                params.put("c_why",compl_contents);
+                ServerSend("complinsert",params);
                 Log.d("선택한 내용 :", compl_contents);
             }
         });
@@ -105,6 +121,33 @@ public class PopCompl extends Activity {
         }
     };
 
+    @Override
+    public void processResponse(int requestCode, int responseCode, String response) {
 
+        if(responseCode==200){
+            if (requestCode == AppConstants.COMPLINSERT) {
+                if (response.equals("1")){
+                    Toast.makeText(getApplicationContext(),"신고 완료되었습니다.",Toast.LENGTH_SHORT).show();
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(),"다시 시도해주세요",Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                System.out.println("unknown request code :" + requestCode);
+            }
+        }else{
+            System.out.println("failure request code :" + requestCode);
+        }
+    }
+
+    @Override
+    public void ServerSend(String cmd, Map<String, String> params) {
+        String url = AppConstants.URL;
+        if(cmd.equals("complinsert")) {
+            url += "rest/compl/insert.json";
+
+            MyApplication.send(AppConstants.COMPLINSERT, Request.Method.POST, url, params, this);
+        }
+    }
 
 }

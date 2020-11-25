@@ -16,7 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MannajobAndroid"
         android:usesCleartextTraffic="true">
-        <activity android:name=".mypage.PopCancelChk"
+        <activity android:name=".JoinAgree"></activity>
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+
+        <activity
+            android:name=".mypage.PopCancelChk"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
             android:name=".mypage.Popcalendar"

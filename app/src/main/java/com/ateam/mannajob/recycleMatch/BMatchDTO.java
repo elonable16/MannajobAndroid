@@ -14,13 +14,15 @@ public class BMatchDTO implements Serializable {
     private String b_stdate;
     private String b_endate;
     private String b_period;
+    private String b_del;
     private String b_state;
     private String b_subject;
-    private Date b_wdate;
-    private String profileImage;
+    private String b_wdate;
     private String b_contents;
+    private String profileImage;
 
-    public BMatchDTO(int b_num, String b_category, String m_id, String b_corp, String b_task, int b_price, String b_location, String b_stdate, String b_endate, String b_period, String b_state, String b_subject, Date b_wdate, String profileImage, String b_contents) {
+
+    public BMatchDTO(int b_num, String b_category, String m_id, String b_corp, String b_task, int b_price, String b_location, String b_stdate, String b_endate, String b_period, String b_del, String b_state, String b_subject, String b_wdate, String b_contents, String profileImage) {
         this.b_num = b_num;
         this.b_category = b_category;
         this.m_id = m_id;
@@ -31,12 +33,22 @@ public class BMatchDTO implements Serializable {
         this.b_stdate = b_stdate;
         this.b_endate = b_endate;
         this.b_period = b_period;
+        this.b_del = b_del;
         this.b_state = b_state;
         this.b_subject = b_subject;
         this.b_wdate = b_wdate;
-        this.profileImage = profileImage;
         this.b_contents = b_contents;
+        this.profileImage = profileImage;
     }
+
+    public String getB_del() {
+        return b_del;
+    }
+
+    public void setB_del(String b_del) {
+        this.b_del = b_del;
+    }
+
 
     public String getB_contents() {
         return b_contents;
@@ -150,11 +162,11 @@ public class BMatchDTO implements Serializable {
         this.b_subject = b_subject;
     }
 
-    public Date getB_wdate() {
+    public String getB_wdate() {
         return b_wdate;
     }
 
-    public void setB_wdate(Date b_wdate) {
+    public void setB_wdate(String b_wdate) {
         this.b_wdate = b_wdate;
     }
 }

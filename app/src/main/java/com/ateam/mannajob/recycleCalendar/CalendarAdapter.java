@@ -93,7 +93,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
             cal_m_id.setText(item.getM_id());
             cal_m_phone.setText(item.getPhone());
             b_location.setText(item.getB_location());
-            cal_mat_date.setText(AppConstants.dateFormat2.format(item.getMat_stdate()));
+            cal_mat_date.setText(item.getMat_stdate());
             cal_mat_hour.setText(item.getMat_hour());
         }
     }

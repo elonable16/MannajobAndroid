@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -12,144 +15,99 @@
         android:background="@drawable/header"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-    <TextView
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="로그인"
+            android:textColor="@color/MYOrange"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <EditText
+        android:id="@+id/login_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="로그인"
-        android:id="@+id/toolbar_title"
-        android:textSize="24sp"
-        android:layout_gravity="center"
-        android:textColor="@color/MYOrange"
-        android:textStyle="bold"
-        />
-    </androidx.appcompat.widget.Toolbar>
+        android:layout_marginTop="180dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/editbox"
+        android:ems="12"
+        android:hint="ID"
+        android:inputType="textPersonName"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:password="true"
+        android:id="@+id/login_passwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/editbox"
+        android:ems="12"
+        android:hint="PASSWORD"
+        android:inputType="textPersonName"
+        android:textSize="15sp"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/login_ok_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/select_button"
+            android:text="로그인" />
+
+        <Button
+            android:id="@+id/register_m_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/select_button"
+            android:text="회원가입" />
+    </LinearLayout>
+
     <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
         android:id="@+id/buttonOAuthLoginImg"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="104dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/register_m_Btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/select_button"
-        android:text="회원가입"
-        app:layout_constraintBottom_toTopOf="@+id/buttonOAuthLoginImg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.721"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.294" />
-
-    <Button
-        android:id="@+id/login_ok_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/select_button"
-        android:text="로그인"
-        app:layout_constraintBottom_toTopOf="@+id/buttonOAuthLoginImg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.272"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.294" />
+        android:layout_marginTop="20dp" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/buttonOAuthLoginImg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.508">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/login_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/editbox"
-                android:ems="13"
-                android:hint="ID"
-                android:inputType="textPersonName"
-                android:paddingLeft="15dp"
-                android:paddingTop="7dp"
-                android:paddingRight="5dp"
-                android:paddingBottom="7dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-
-            <EditText
-                android:id="@+id/login_passwd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/editbox"
-                android:ems="13"
-                android:hint="PASSWORD"
-                android:inputType="textPersonName"
-                android:paddingLeft="15dp"
-                android:paddingTop="7dp"
-                android:paddingRight="5dp"
-                android:paddingBottom="7dp" />
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <LinearLayout
-            android:layout_width="fill_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+        <com.kakao.usermgmt.LoginButton
+            android:id="@+id/kakaobtn"
+            android:background="@drawable/kakao_login_medium_narrow"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"/>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"/>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"/>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"/>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"/>
-
+            android:scaleY="0.92"
+            android:scaleX="0.92"
+            android:layout_marginTop="5dp"
+            tools:layout_editor_absoluteX="0dp"
+            />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

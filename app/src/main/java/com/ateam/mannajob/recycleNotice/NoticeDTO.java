@@ -9,15 +9,17 @@ public class NoticeDTO implements Serializable {
     private String ad_id;
     private String n_contents;
     private int n_cnt;
-    private Date n_udate;
+    private String n_udate;
+    private String n_del;
 
-    public NoticeDTO(int n_num, String n_subject, String ad_id, String n_contents, int n_cnt, Date n_udate) {
+    public NoticeDTO(int n_num, String n_subject, String ad_id, String n_contents, int n_cnt, String n_udate, String n_del) {
         this.n_num = n_num;
         this.n_subject = n_subject;
         this.ad_id = ad_id;
         this.n_contents = n_contents;
         this.n_cnt = n_cnt;
         this.n_udate = n_udate;
+        this.n_del = n_del;
     }
 
     public int getN_num() {
@@ -60,11 +62,19 @@ public class NoticeDTO implements Serializable {
         this.n_cnt = n_cnt;
     }
 
-    public Date getN_udate() {
+    public String getN_udate() {
         return n_udate;
     }
 
-    public void setN_udate(Date n_udate) {
+    public void setN_udate(String n_udate) {
         this.n_udate = n_udate;
+    }
+
+    public String getN_del() {
+        return n_del;
+    }
+
+    public void setN_del(String n_del) {
+        this.n_del = n_del;
     }
 }

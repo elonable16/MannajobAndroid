@@ -110,7 +110,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
             b_price.setText(Integer.toString(item.getB_price()));
             b_m_id.setText(item.getM_id());
             b_location.setText(item.getB_location());
-            b_wdate.setText(AppConstants.dateFormat2.format(item.getB_wdate()));
+            b_wdate.setText(item.getB_wdate().substring(0,11));
             String imageName = item.getProfileImage();
             MainActivity activity = new MainActivity();
             activity.getImageToServer(image_profile ,imageName);

@@ -9,13 +9,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.ateam.mannajob.AppConstants;
+import com.ateam.mannajob.MyApplication;
 import com.ateam.mannajob.OnFragmentItemSelectedListener;
 import com.ateam.mannajob.R;
+import com.ateam.mannajob.ServerController;
 import com.ateam.mannajob.match.PopOkMatching;
 import com.ateam.mannajob.recycleMatch.BMatchDTO;
 import com.ateam.mannajob.recycleMyMatch.MyMatchAdapter;
@@ -23,12 +28,16 @@ import com.ateam.mannajob.recycleMyMatch.OnMyMatchItemClickListener;
 import com.ateam.mannajob.recycleMyRequest.MatchDTO;
 import com.ateam.mannajob.recycleMyRequest.OnRequestMatchItemClickListener;
 import com.ateam.mannajob.recycleMyRequest.RequestMatchAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
-public class MypageMatchManage extends Fragment {
+public class MypageMatchManage extends Fragment implements MyApplication.OnResponseListener, ServerController {
     private static final String TAG = "MypageMatchManage";
     RecyclerView mypage_requset_state_recyc;
     RequestMatchAdapter requestAdapter;
@@ -69,6 +78,8 @@ public class MypageMatchManage extends Fragment {
 
         SettingEditRecyc();
 
+        ServerSend("Bmatchlist",null);
+
         mypage_requset_state_recyc = rootview.findViewById(R.id.mypage_request_state_recyc);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
         mypage_requset_state_recyc.setLayoutManager(layoutManager2);
@@ -76,23 +87,15 @@ public class MypageMatchManage extends Fragment {
 
         SettingRequestRecyc();
 
+        ServerSend("Matchlist",null);
+
 
     }
 
 
 //        작성 현황 프래그먼트
     public void SettingEditRecyc(){
-        ArrayList<BMatchDTO> list = new ArrayList<>();
-        myMatchAdapter.setItems(list);
-//       수정필요
-        Calendar calendar = Calendar.getInstance();
-        Date now = calendar.getTime();
-//        수정필요
-        list.add( new BMatchDTO(1,"현직자","idimda","삼성전자","IT/네트워크",10000,"오창읍","2020-10-10","2020-10-10","1","A","", now,"default.jpg","감사합니다"));
-        list.add( new BMatchDTO(1,"현직자","idimda","삼성전자","IT/네트워크",10000,"오창읍","2020-10-10","2020-10-10","1","B","", now,"4.jpg","감사합니다."));
-        list.add( new BMatchDTO(1,"현직자","idimda","삼성전자","IT/네트워크",10000,"오창읍","2020-10-10","2020-10-10","1","C","", now,"5.jpg","감사합니다"));
-        list.add( new BMatchDTO(1,"현직자","idimda","삼성전자","IT/네트워크",10000,"오창읍","2020-10-10","2020-10-10","1","A","", now,"6.jpg","감사합니다."));
-        mypage_edit_state_recyc.setAdapter(myMatchAdapter);
+
 //////////adapter 리스너 정의//////
         myMatchAdapter.setOnItemClickListner(new OnMyMatchItemClickListener() {
             @Override
@@ -112,17 +115,7 @@ public class MypageMatchManage extends Fragment {
         });
     }
     public void SettingRequestRecyc(){
-        ArrayList<MatchDTO> list = new ArrayList<MatchDTO>();
-        requestAdapter.setItems(list);
-//       수정필요
-        Calendar calendar = Calendar.getInstance();
-        Date now = calendar.getTime();
-//        수정필요
-        list.add( new MatchDTO(1,2,"idimda","1","2020-10-01","2020-10-01","2020-11-11","A","00전자 매칭요청"));
-        list.add( new MatchDTO(1,2,"idimda","1","2020-10-01","2020-10-01","2020-11-11","B","00전자 매칭요청"));
-        list.add( new MatchDTO(1,2,"idimda","1","2020-10-01","2020-10-01","2020-11-11","C","00전자 매칭요청"));
-        list.add( new MatchDTO(1,2,"idimda","1","2020-10-01","2020-10-01","2020-11-11","D","00전자 매칭요청"));
-        mypage_requset_state_recyc.setAdapter(requestAdapter);
+
 //////////adapter 리스너 정의//////
         requestAdapter.setOnItemClickListner(new OnRequestMatchItemClickListener() {
             @Override
@@ -140,5 +133,51 @@ public class MypageMatchManage extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void processResponse(int requestCode, int responseCode, String response) {
+        Gson gson;
+        Type type;
+        if(responseCode==200){
+            if (requestCode == AppConstants.BMATCHLIST) {
+                if(response == null){
+                    Toast.makeText(context,"로그인이 필요합니다.",Toast.LENGTH_SHORT).show();
+                }
+                gson = new Gson();
+                type = new TypeToken<ArrayList<BMatchDTO>>(){}.getType();
+                ArrayList<BMatchDTO> list = gson.fromJson(response, type);
+                myMatchAdapter.setItems(list);
+
+                mypage_edit_state_recyc.setAdapter(myMatchAdapter);
+
+            }else if (requestCode == AppConstants.MATCHLIST) {
+                if(response == null){
+                    Toast.makeText(context,"로그인이 필요합니다.",Toast.LENGTH_SHORT).show();
+                }
+                gson = new Gson();
+                type = new TypeToken<ArrayList<MatchDTO>>(){}.getType();
+                ArrayList<MatchDTO> list = gson.fromJson(response, type);
+                requestAdapter.setItems(list);
+                mypage_requset_state_recyc.setAdapter(requestAdapter);
+            }else{
+                System.out.println("unknown request code :" + requestCode);
+            }
+            System.out.println("failure request code :" + requestCode);
+        }
+    }
+
+    @Override
+    public void ServerSend(String cmd, Map<String, String> params) {
+        String url =AppConstants.URL;
+        if(cmd.equals("Bmatchlist")){
+            url +="rest/bmatchlist.json";
+            Log.d("url:" , url);
+            MyApplication.send(AppConstants.BMATCHLIST, Request.Method.GET,url,params,this);
+        }else if(cmd.equals("Matchlist")){
+            url +="rest/matchlist.json";
+            Log.d("url:" , url);
+            MyApplication.send(AppConstants.MATCHLIST, Request.Method.GET,url,params,this);
+        }
     }
 }

@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     public void run() {
         URL url = null;
         try {
-            url = new URL("http://192.168.0.225:8080/resources/images/member_img/"+profile_file_name);
+            url = new URL("http://192.168.0.225:8080/resources/certifi/"+profile_file_name);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.connect();
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     /////////////////////////////////////////////////////////////////////////////////////////////////////////// 서버통신
 
     @Override
-    public void ServerSend(String cmd, HashMap<String,String> params) {
+    public void ServerSend(String cmd, Map<String,String> params) {
 //        if(cmd.equals("Login")){
 //            login(params);
 //        }
