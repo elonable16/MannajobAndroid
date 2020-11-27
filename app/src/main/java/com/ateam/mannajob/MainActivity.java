@@ -1,10 +1,12 @@
 package com.ateam.mannajob;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +16,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,6 +32,8 @@ import com.ateam.mannajob.serivce.BoardNotice;
 import com.ateam.mannajob.serivce.BoardQnA;
 import com.ateam.mannajob.serivce.Service;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
@@ -37,6 +42,7 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,14 +119,12 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 switch (item.getItemId()) {
                     case R.id.tab1:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container_main, matching_f).commit();
-
                         return true;
                     case R.id.tab2:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container_main, service_f).addToBackStack(null).commit();
                         return true;
                     case R.id.tab3:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_main, mypage_f).addToBackStack(null).commit();
-
+                        ServerSend("loginState_fragment3",null);
                         return true;
 //                    case R.id.tab3:
 //                        if (LoginState.getState(getApplicationContext()).toString().equals("OK")) {
@@ -186,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     public void run() {
         URL url = null;
         try {
-            url = new URL("http://192.168.0.225:8080/resources/certifi/"+profile_file_name);
+            url = new URL("http://175.205.193.91:13580/resources/certifi/"+profile_file_name);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.connect();
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -217,15 +221,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.login_tab:
-                Toast.makeText(this, "로그인 창 클릭", Toast.LENGTH_SHORT).show();
-                // 새 액티비티 열기(로그인)
-
-//                if (LoginState.getState(this).toString().equals("OK")) {
-//                    getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment5).commit();
-//                } else {
-                    Intent intent = new Intent(this, LoginActivity.class);
-                    startActivity(intent);
-//                }
+                ServerSend("LoginState",null);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -279,18 +275,69 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
     @Override
     public void ServerSend(String cmd, Map<String,String> params) {
-//        if(cmd.equals("Login")){
-//            login(params);
-//        }
-    }
-    public void  login(Map<String,String> params){
-//        String url = AppConstants.URL; // /이후로 작성
-//        url += "/logincheck";
-//        MyApplication.send(AppConstants.LOGIN, Request.Method.POST,url,params,this);
+        String url =AppConstants.URL;
+        if(cmd.equals("LoginState")){
+            url +="rest/check";
+            MyApplication.send(AppConstants.LOGINSTATE, Request.Method.GET,url,params,this);
+        }else  if(cmd.equals("loginState_fragment3")){
+            url +="rest/check";
+            MyApplication.send(AppConstants.LOGINSTATEFRAGMENT3, Request.Method.GET,url,params,this);
+        }else  if(cmd.equals("logout")){
+            url +="rest/logout";
+            MyApplication.send(AppConstants.LOGOUT, Request.Method.GET,url,params,this);
+        }
     }
 
     @Override
     public void processResponse(int requestCode, int responseCode, String response) {
+        if(responseCode==200){
+            if(requestCode == AppConstants.LOGINSTATE){
+                if(response.equals("1")){
+                    onClickLogoutDialogHandler();
+                }else{
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            }else if(requestCode == AppConstants.LOGINSTATEFRAGMENT3){
+                if(response.equals("1")){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_main, mypage_f).addToBackStack(null).commit();
+                }else{
+                    Toast.makeText(getApplicationContext(),"로그인이 필요합니다.",Toast.LENGTH_SHORT).show();
+                }
+            }else if(requestCode == AppConstants.LOGOUT){
+                if(response.equals("1")){
+                    Toast.makeText(getApplicationContext(),"로그아웃 되었습니다.",Toast.LENGTH_SHORT).show();
+                    onTabSelected(AppConstants.FRAGMENT_MATCH,null);
+                }else{
+                    Toast.makeText(getApplicationContext(),"연결에 문제가 생겼습니다.",Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                System.out.println("unknown request code :" + requestCode);
+            }
+        }else{
+            System.out.println("failure request code :" + requestCode);
+        }
+    }
+    public void onClickLogoutDialogHandler(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+        builder.setMessage("로그아웃 하시겠습니까?");
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int id)
+            {
+                ServerSend("logout",null);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int id)
+            {
+
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

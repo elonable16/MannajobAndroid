@@ -62,6 +62,7 @@ public class Mypage extends Fragment implements MainActivity.onKeyBackPressedLis
             listener = (OnFragmentItemSelectedListener)context;
         }
 
+
     }
     @Override
     public void onDetach(){
@@ -78,10 +79,10 @@ public class Mypage extends Fragment implements MainActivity.onKeyBackPressedLis
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_mypage, container, false);
 
-        ServerSend("MyProfile",null);
+
 
         initUI(rootView);
-
+        ServerSend("MyProfile",null);
 
         return rootView;
     }
@@ -92,11 +93,11 @@ public class Mypage extends Fragment implements MainActivity.onKeyBackPressedLis
         mypagePhone= rootview.findViewById(R.id.mypage_phone);
         mypageEmail= rootview.findViewById(R.id.mypage_email);
         profileImage = rootview.findViewById(R.id.profile_image);
-        update_profile_btn = rootview.findViewById(R.id.update_profile_btn);
-        update_profile_btn.setOnClickListener(v -> {
-            Intent intent = new Intent(context,PopPasswdCheck.class);
-            startActivityForResult(intent,101);
-        });
+//        update_profile_btn = rootview.findViewById(R.id.update_profile_btn);
+//        update_profile_btn.setOnClickListener(v -> {
+//            Intent intent = new Intent(context,PopPasswdCheck.class);
+//            startActivityForResult(intent,101);
+//        });
         container = rootview.findViewById(R.id.container_mypage);
         switchMultiButton = rootview.findViewById(R.id.mypage_switchButton);
         switchMultiButton.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {
@@ -154,7 +155,6 @@ public class Mypage extends Fragment implements MainActivity.onKeyBackPressedLis
                 myprofile = gson.fromJson(response, MemberDTO.class);
                 if(myprofile==null){
                     Toast.makeText(context,"로그인이 필요합니다.",Toast.LENGTH_SHORT).show();
-                    listener.onTabSelected(AppConstants.FRAGMENT_MATCH,null);
                     return;
                 }
                 SettingDisplay();

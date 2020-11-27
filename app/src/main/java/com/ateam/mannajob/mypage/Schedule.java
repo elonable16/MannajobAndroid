@@ -85,6 +85,7 @@ public class Schedule extends Fragment implements MyApplication.OnResponseListen
 
         params.put("yearmonth",yearmonth);
         ServerSend("monthmatch",params);
+        ServerSend("monthbmatch",params);
 
 
         initUI(rootView);
@@ -179,14 +180,12 @@ public class Schedule extends Fragment implements MyApplication.OnResponseListen
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(date);
                         events.add(new EventDay(calendar, R.drawable.calendardot));
-
+                        calendarView.setEvents(events);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }
-                Map<String,String> params = new HashMap<String,String>();
-                params.put("yearmonth",yearmonth);
-                ServerSend("monthbmatch",params);
+
 
             }else if (requestCode == AppConstants.MONTHBMATCH) {
                 if(response == null){
@@ -208,12 +207,12 @@ public class Schedule extends Fragment implements MyApplication.OnResponseListen
                         calendar.setTime(date);
 
                         events.add(new EventDay(calendar, R.drawable.calendardot));
-
+                        calendarView.setEvents(events);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }
-                calendarView.setEvents(events);
+
             }else{
                 System.out.println("unknown request code :" + requestCode);
             }

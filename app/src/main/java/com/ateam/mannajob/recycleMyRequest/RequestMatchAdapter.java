@@ -82,7 +82,7 @@ public class RequestMatchAdapter extends RecyclerView.Adapter<RequestMatchAdapte
                 public void onClick(View view) { // 눌린 리싸이클뷰 인덱스(position을 가지고 리스너 처리가 연결
                     int position = getAdapterPosition();
                     if(listener != null){
-                        listener.onItemClick(ViewHolder.this, view, position,AppConstants.ADAPTER_BTN_CANCEL);
+                        listener.onItemClick(ViewHolder.this, view, position, AppConstants.ADAPTER_BTN_CANCEL);
                     }
                 }
             });
@@ -91,7 +91,7 @@ public class RequestMatchAdapter extends RecyclerView.Adapter<RequestMatchAdapte
                 public void onClick(View view) { // 눌린 리싸이클뷰 인덱스(position을 가지고 리스너 처리가 연결
                     int position = getAdapterPosition();
                     if(listener != null){
-                        listener.onItemClick(ViewHolder.this, view, position,AppConstants.ADAPTER_BTN_REVIEW);
+                        listener.onItemClick(ViewHolder.this, view, position, AppConstants.ADAPTER_BTN_REVIEW);
                     }
                 }
             });

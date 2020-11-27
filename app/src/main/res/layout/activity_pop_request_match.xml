@@ -36,6 +36,15 @@
                 android:layout_height="wrap_content"
                 android:text="희망일자" />
 
+<!--            <TextView
+                android:id="@+id/mat_stdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:padding="5dp"
+                android:background="@drawable/editbox_gray"
+                android:inputType="date" />-->
+
             <Spinner
                 android:id="@+id/mat_stdate_year"
                 android:layout_width="wrap_content"
@@ -81,6 +90,15 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:text="시작시간" />
+
+       <!--     <TextView
+                android:id="@+id/mat_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:ems="5"
+                android:background="@drawable/editbox_gray"
+                android:inputType="time" />-->
 
             <Spinner
                 android:id="@+id/mat_stdate_hour"

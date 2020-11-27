@@ -1,5 +1,6 @@
 package com.ateam.mannajob;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -72,6 +73,8 @@ public class LoginActivity extends AppCompatActivity implements MyApplication.On
     EditText PASSWORD;
     Button loginButton;
     Button registerButton;
+    TextView findid;
+    TextView findpasswd;
 
     LoginButton kakaobtn;
 
@@ -107,6 +110,21 @@ public class LoginActivity extends AppCompatActivity implements MyApplication.On
         ID = findViewById(R.id.login_id);
         PASSWORD =findViewById(R.id.login_passwd);
         loginButton = findViewById(R.id.login_ok_btn);
+        // 아이디 찾기
+        findid = findViewById(R.id.findid);
+        findid.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(),PopFindID.class);
+            startActivity(intent);
+        });
+        // 패스워드 찾기
+        findpasswd = findViewById(R.id.findpasswd);
+        findpasswd.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(),FindPasswdInput.class);
+            startActivity(intent);
+        });
+
+
+
 
         kakaobtn = findViewById(R.id.kakaobtn);
         kakaobtn.setOnClickListener(new View.OnClickListener() {
@@ -157,15 +175,7 @@ public class LoginActivity extends AppCompatActivity implements MyApplication.On
     public void processResponse(int requestCode, int responseCode, String response) {
         if(responseCode==200){
             if(requestCode == AppConstants.LOGINCHECK){
-//                XmlParserCreator parserCreator = () -> {
-//                    try{
-//                        return XmlPullParserFactory.newInstance().newPullParser();
-//                    }catch (Exception e){
-//                        throw new RuntimeException(e);
-//                    }
-//                };
-//                GsonXml gsonXml = new GsonXmlBuilder().setXmlParserCreator(parserCreator).setSameNameLists(true).create();
-//                check chk = gsonXml.fromXml(response, check.class);
+
                 String loginckh = response;
                 if(loginckh.equals("1")){
                     Toast.makeText(getApplicationContext(),"로그인 되었습니다.",Toast.LENGTH_SHORT).show();
@@ -223,6 +233,7 @@ public class LoginActivity extends AppCompatActivity implements MyApplication.On
         mOAuthLoginButton.setOAuthLoginHandler(mOAuthLoginHandler);
 
     }
+    @SuppressLint("HandlerLeak")
     private OAuthLoginHandler mOAuthLoginHandler = new OAuthLoginHandler() {
         @Override
         public void run(boolean success) {

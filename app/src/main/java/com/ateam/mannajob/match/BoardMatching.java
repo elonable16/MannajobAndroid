@@ -27,6 +27,7 @@ import com.ateam.mannajob.OnFragmentItemSelectedListener;
 import com.ateam.mannajob.R;
 import com.ateam.mannajob.ServerController;
 import com.ateam.mannajob.recycleMatch.BMatchDTO;
+import com.ateam.mannajob.recycleMyRequest.MatchDTO;
 
 import java.util.Map;
 import java.util.Objects;
@@ -51,6 +52,7 @@ public class BoardMatching extends Fragment implements MainActivity.onKeyBackPre
     ImageView compl_btn;
     Bundle bundle;
     BMatchDTO BMatchDTO;
+    Button review_view_btn;
 
     Context context;
     OnFragmentItemSelectedListener listener;
@@ -92,6 +94,12 @@ public class BoardMatching extends Fragment implements MainActivity.onKeyBackPre
             ServerSend("compl",null);
 //
         });
+        review_view_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(context,PopReviewView.class);
+            intent.putExtra("m_id", BMatchDTO.getM_id());
+            startActivity(intent);
+        });
+
         return rootview;
     }
 
@@ -109,7 +117,9 @@ public class BoardMatching extends Fragment implements MainActivity.onKeyBackPre
         compl_btn = rootview.findViewById(R.id.compl_btn);
         b_wdate_detail = rootview.findViewById(R.id.b_wdate_detail);
         profile_image = rootview.findViewById(R.id.b_profile_detail);
+        review_view_btn = rootview.findViewById(R.id.review_view_btn);
     }
+
     private void SetDisplay(BMatchDTO BMatchDTO){
         b_subject_detail.setText(BMatchDTO.getB_subject());
         b_m_id_detail.setText(BMatchDTO.getM_id());
@@ -146,7 +156,7 @@ public class BoardMatching extends Fragment implements MainActivity.onKeyBackPre
                     Toast.makeText(context,"로그인이 필요합니다",Toast.LENGTH_SHORT).show();
                 }else if(response.equals("1")){
                     Intent intent = new Intent(context,PopRequestMatch.class);
-                    intent.putExtra("b_num", BMatchDTO.getB_num());
+                    intent.putExtra("b_num", Integer.toString(BMatchDTO.getB_num()));
                     startActivity(intent);
                 }
             }else if(requestCode == AppConstants.GOCOMPL){

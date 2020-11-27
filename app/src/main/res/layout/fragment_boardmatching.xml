@@ -22,18 +22,29 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/b_profile_detail"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/profile" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/b_profile_detail"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/profile" />
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+
 
             <TextView
                 android:id="@+id/b_wdate_detail"
@@ -94,6 +105,25 @@
                     android:layout_marginRight="20dp"
                     android:text="TextView"
                     android:textColor="@color/MYOrange" />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <Button
+                    android:id="@+id/review_view_btn"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/select_button"
+                    android:text="리뷰보기"
+                    android:textSize="11sp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="20dp"
+                    />
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -219,7 +249,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:text="기타"
+        android:text="내용"
         android:textStyle="bold" />
 
     <TextView

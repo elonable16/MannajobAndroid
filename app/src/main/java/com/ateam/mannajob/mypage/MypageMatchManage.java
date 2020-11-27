@@ -103,12 +103,13 @@ public class MypageMatchManage extends Fragment implements MyApplication.OnRespo
                 if(btn == AppConstants.ADAPTER_BTN_OK){
                     BMatchDTO item = myMatchAdapter.getItem(position);
                     Intent intent = new Intent(context, PopOkMatching.class);
-                    intent.putExtra("matchitem",item);
+                    intent.putExtra("b_num",item.getB_num());
                     startActivity(intent);
                 }else if(btn == AppConstants.ADAPTER_BTN_REVIEW){
                     BMatchDTO item = myMatchAdapter.getItem(position);
                     Intent intent = new Intent(context, PopReview.class);
-                    intent.putExtra("matchitem",item);
+                    intent.putExtra("type","2"); // 글쓴 사람이 작성하는 리뷰
+                    intent.putExtra("b_num",Integer.toString(item.getB_num()));
                     startActivity(intent);
                 }
             }
@@ -123,12 +124,17 @@ public class MypageMatchManage extends Fragment implements MyApplication.OnRespo
                 if(btn == AppConstants.ADAPTER_BTN_CANCEL){
                     MatchDTO item = requestAdapter.getItem(position);
                     Intent intent = new Intent(context, PopCancelChk.class);
-                    intent.putExtra("matchitem",item);
+
+                    intent.putExtra("mat_num", Integer.toString(item.getMat_num()));
+                    intent.putExtra("b_num",Integer.toString(item.getB_num()));
                     startActivity(intent);
                 }else if(btn == AppConstants.ADAPTER_BTN_REVIEW){
                     MatchDTO item = requestAdapter.getItem(position);
+
                     Intent intent = new Intent(context, PopReview.class);
-                    intent.putExtra("matchitem",item);
+                    intent.putExtra("type","1"); // 매칭 신청 한 사람이 작성하는 리뷰
+                    intent.putExtra("mat_num", Integer.toString(item.getMat_num()));
+                    intent.putExtra("b_num",Integer.toString(item.getB_num()));
                     startActivity(intent);
                 }
             }

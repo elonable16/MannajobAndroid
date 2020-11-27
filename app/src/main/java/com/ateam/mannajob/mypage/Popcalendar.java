@@ -107,13 +107,19 @@ public class Popcalendar extends Activity implements MyApplication.OnResponseLis
                 ArrayList<CalendarDTO> list = gson.fromJson(response, type);
                 if (list == null){
                     adapter.notifyDataSetChanged();
+                    noMatchCount.setVisibility(View.VISIBLE);
                     return;
+                }else {
+                    noMatchCount.setVisibility(View.GONE);
                 }
+
                 for(int i=0;i<list.size(); i++ ) {
                     adapter.addItem(list.get(i));
+
                 }
                 scheduleRecyc.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+
             }else{
                 System.out.println("unknown request code :" + requestCode);
             }

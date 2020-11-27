@@ -33,10 +33,13 @@ public class AppConstants {
     public static final String FINISH = "완료";
     public static final String REQUEST = "요청";
     public static final String REJECT = "거절";
-    public static final String URL = "http://192.168.0.225:8080/";
+    public static final String URL = "http://175.205.193.91:13580/";
 
-
-
+    public static final int LOGOUT = 98;
+    public static final int FINDPASSWD = 97;
+    public static final int RESETPASSWD = 96;
+    public static final int LOGINSTATEFRAGMENT3 = 99;
+    public static final int LOGINSTATE = 100;
     public static final int LOGINCHECK = 101;
     public static final int MEMBERCHECK = 102;
     public static final int MEMBERJOIN = 103;
@@ -44,13 +47,30 @@ public class AppConstants {
     public static final int GOMATCHREQUSET = 105;
     public static final int GOCOMPL = 106;
     public static final int COMPLINSERT = 107;
+    public static final int MATCHINSERT = 108;
+    public static final int REVIEWLIST = 109;
+
+
     public static final int MATCHDATA = 110;
     public static final int SEARCHMATCH = 111;
+
+
     public static final int NOTICEDATA = 120;
     public static final int QNADATA = 121;
+
+
+
     public static final int MYPROFILE = 131;
     public static final int BMATCHLIST = 132;
     public static final int MATCHLIST = 133;
+    public static final int REVIEWINSERT = 134;
+    public static final int MATCHCANCEL = 135;
+    public static final int MATCHOKLIST = 136;
+    public static final int MATCHOK = 137;
+    public static final int BMATCHCANCEL = 138;
+
+
+
     public static final int MONTHMATCH = 141;
     public static final int MONTHBMATCH = 142;
 

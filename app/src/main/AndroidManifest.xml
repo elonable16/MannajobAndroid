@@ -16,7 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MannajobAndroid"
         android:usesCleartextTraffic="true">
-        <activity android:name=".JoinAgree"></activity>
+        <activity android:name=".PopFindID"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity
+            android:name=".match.PopReviewView"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity android:name=".JoinAgree" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -33,6 +38,12 @@
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
             android:name=".mypage.PopReview"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity
+            android:name=".FindPasswdInput"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity
+            android:name=".FindPasswdReset"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
             android:name=".match.PopOkMatching"
