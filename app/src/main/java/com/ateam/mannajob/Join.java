@@ -17,6 +17,8 @@ import com.android.volley.Request;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Join extends AppCompatActivity implements MyApplication.OnResponseListener,ServerController {
 
@@ -55,6 +57,23 @@ public class Join extends AppCompatActivity implements MyApplication.OnResponseL
         }
         UIinit();
         reg_ok_btn.setOnClickListener(v -> {
+            Pattern p_id = Pattern.compile("^[a-zA-Z0-9]*$");
+            Pattern p_passwd = Pattern.compile("^[a-zA-Z0-9]{8,}$");
+            Pattern p_name = Pattern.compile("^[a-zA-Z가-힣]*$");
+            Pattern p_email = Pattern.compile("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$");
+            Pattern p_phone = Pattern.compile("^\\d{3}-\\d{3,4}-\\d{4}$");
+            Matcher mpasswd = p_passwd.matcher(passwd.getText().toString());
+            Matcher mphone = p_phone.matcher(phone.getText().toString());
+
+//          정규표현식 사용
+            if(!mpasswd.find()){
+                Toast.makeText(getApplicationContext(),"비밀번호를 영문+숫자로 8자리이상 입력하세요",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(!mphone.find()){
+                Toast.makeText(getApplicationContext(),"전화번호 형식이 틀렸습니다.",Toast.LENGTH_SHORT).show();
+                return;
+            }
             Map<String, String> params = new HashMap<String, String>();
             params.put("m_passwd",passwd.getText().toString());
             params.put("m_phone",phone.getText().toString());
@@ -77,6 +96,26 @@ public class Join extends AppCompatActivity implements MyApplication.OnResponseL
                     Toast.makeText(getApplicationContext(),"패스워드가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+//          정규표현식 사용
+                Matcher mid = p_id.matcher(id.getText().toString());
+                Matcher mname = p_name.matcher(name.getText().toString());
+                Matcher memail = p_email.matcher(email.getText().toString());
+                if(!mid.find()){
+                    Toast.makeText(getApplicationContext(),"아이디를 영문+숫자로 입력하세요",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!mname.find()){
+                    Toast.makeText(getApplicationContext(),"이름을 영어 또는 한글로 입력하세요.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!memail.find()){
+                    Toast.makeText(getApplicationContext(),"이메일 형식이 틀렸습니다.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+
                 params.put("m_id",id.getText().toString());
                 params.put("m_name",name.getText().toString());
                 params.put("m_email",email.getText().toString());

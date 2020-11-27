@@ -20,6 +20,8 @@ import com.android.volley.Request;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class FindPasswdReset extends Activity implements MyApplication.OnResponseListener, ServerController{
@@ -45,6 +47,16 @@ public class FindPasswdReset extends Activity implements MyApplication.OnRespons
         passwd_re = findViewById(R.id.resetpasswd2);
         passwd_ok_btn = findViewById(R.id.reset_ok_btn);
         passwd_ok_btn.setOnClickListener(v -> {
+            Pattern p_passwd = Pattern.compile("^[a-zA-Z0-9]{8,}$");
+            Matcher mpasswd = p_passwd.matcher(passwd.getText().toString());
+            if(!mpasswd.find()){
+                Toast.makeText(getApplicationContext(),"비밀번호를 영문+숫자로 8자리이상 입력하세요",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(!passwd.getText().toString().equals(passwd_re.getText().toString())){
+                Toast.makeText(getApplicationContext(),"패스워드가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
+                return;
+            }
             HashMap<String,String> params = new HashMap<String,String>();
             params.put("m_passwd",passwd.getText().toString());
             params.put("m_passwd2",passwd_re.getText().toString());

@@ -44,9 +44,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:textSize="20sp" />
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textSize="16sp"
+        android:hint="영문자 + 숫자"/>
 
     <TextView
         android:id="@+id/textPasswd"
@@ -67,10 +68,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         android:password="true"
-        android:textSize="20sp" />
+        android:textSize="16sp"
+        android:hint="영문자 + 숫자 8자리 이상"/>
 
     <TextView
         android:id="@+id/textREPASSWD"
@@ -91,10 +93,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         android:password="true"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textName"
@@ -117,9 +119,9 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:textSize="20sp" />
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textView5"
@@ -140,9 +142,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:textSize="20sp" />
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textSize="16sp"
+        android:hint="010-XXXX-XXXX"/>
 
     <TextView
         android:id="@+id/textEmail"
@@ -163,9 +166,9 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:textSize="20sp" />
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
