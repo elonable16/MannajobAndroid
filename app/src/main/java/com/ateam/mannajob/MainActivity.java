@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.Theme_MannajobAndroid);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         UIinit();
