@@ -48,13 +48,16 @@ public class Join extends AppCompatActivity implements MyApplication.OnResponseL
 
         Intent intent = getIntent();
         m_api = intent.getExtras().getString("m_api");
-        if(intent.getExtras().getString("m_id") ==null) {
+        if(intent.getExtras().getString("m_id") !=null) {
             userid = intent.getExtras().getString("m_id");
             if (m_api.equals("n")) {
                 useremail = intent.getExtras().getString("m_email");
             }
             username = intent.getExtras().getString("m_name");
+            Log.d("회원가입",username+userid+useremail);
         }
+
+
         UIinit();
         reg_ok_btn.setOnClickListener(v -> {
             Pattern p_id = Pattern.compile("^[a-zA-Z0-9]*$");
@@ -86,10 +89,6 @@ public class Join extends AppCompatActivity implements MyApplication.OnResponseL
                 }else{
                     params.put("m_email",email.getText().toString());
                 }
-
-                Log.d("m_name", username);
-                Log.d("m_api", m_api);
-                Log.d("apijoin",String.valueOf(params));
                 ServerSend("apijoin", params);
             }else {
                 if(!passwd.getText().toString().equals(passwd_re.getText().toString())){
@@ -114,8 +113,6 @@ public class Join extends AppCompatActivity implements MyApplication.OnResponseL
                     return;
                 }
 
-
-
                 params.put("m_id",id.getText().toString());
                 params.put("m_name",name.getText().toString());
                 params.put("m_email",email.getText().toString());
@@ -125,7 +122,6 @@ public class Join extends AppCompatActivity implements MyApplication.OnResponseL
 
         });
         reg_cancel_btn.setOnClickListener(v -> {
-
             finish();
         });
     }

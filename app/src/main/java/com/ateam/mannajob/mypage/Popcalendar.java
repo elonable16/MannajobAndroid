@@ -61,10 +61,11 @@ public class Popcalendar extends Activity implements MyApplication.OnResponseLis
 
         ArrayList<CalendarDTO> list = new ArrayList<>();
         adapter = new CalendarAdapter();
-
+        scheduleRecyc.setAdapter(adapter);
         Map<String,String> params = new HashMap<String,String>();
         params.put("yearmonth",yearmonth);
         ServerSend("monthmatch",params);
+        ServerSend("monthbmatch",params);
 
 
         if(adapter.getItemCount()==0){
@@ -85,16 +86,15 @@ public class Popcalendar extends Activity implements MyApplication.OnResponseLis
                 gson = new Gson();
                 type = new TypeToken<ArrayList<CalendarDTO>>(){}.getType();
                 ArrayList<CalendarDTO> list = gson.fromJson(response, type);
+                Log.d("리스트",list.toString());
                 if (list != null){
-                    adapter.setItems(list);
-                    scheduleRecyc.setAdapter(adapter);
+                    for(int i=0;i<list.size(); i++ ) {
+                        Log.d("리스트",list.toString());
+                        adapter.addItem(list.get(i));
+                    }
                 }
+                adapter.notifyDataSetChanged();
 
-
-
-                Map<String,String> params = new HashMap<String,String>();
-                params.put("yearmonth",yearmonth);
-                ServerSend("monthbmatch",params);
 
 
             }else if (requestCode == AppConstants.MONTHBMATCH) {
@@ -105,20 +105,14 @@ public class Popcalendar extends Activity implements MyApplication.OnResponseLis
                 gson = new Gson();
                 type = new TypeToken<ArrayList<CalendarDTO>>(){}.getType();
                 ArrayList<CalendarDTO> list = gson.fromJson(response, type);
-                if (list == null){
-                    adapter.notifyDataSetChanged();
-                    noMatchCount.setVisibility(View.VISIBLE);
-                    return;
-                }else {
-                    noMatchCount.setVisibility(View.GONE);
+                if (list != null){
+                    for(int i=0;i<list.size(); i++ ) {
+                        Log.d("리스트",list.toString());
+                        adapter.addItem(list.get(i));
+                    }
                 }
-
-                for(int i=0;i<list.size(); i++ ) {
-                    adapter.addItem(list.get(i));
-
-                }
-                scheduleRecyc.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+
 
             }else{
                 System.out.println("unknown request code :" + requestCode);

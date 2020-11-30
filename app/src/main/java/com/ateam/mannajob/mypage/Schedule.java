@@ -106,6 +106,7 @@ public class Schedule extends Fragment implements MyApplication.OnResponseListen
 
                 Intent intent = new Intent(getContext(), Popcalendar.class);
                 intent.putExtra("mat_stdate" , AppConstants.dateFormat5.format(clickedDayCalendar.getTime()));
+                Log.d("클릭 시간",AppConstants.dateFormat5.format(clickedDayCalendar.getTime()));
                 startActivity(intent);
             }
         });
@@ -120,6 +121,7 @@ public class Schedule extends Fragment implements MyApplication.OnResponseListen
                 Map<String,String> params = new HashMap<String,String>();
                 params.put("yearmonth",yearmonth);
                 ServerSend("monthmatch",params);
+                ServerSend("monthbmatch",params);
 
             }
         });
@@ -134,6 +136,7 @@ public class Schedule extends Fragment implements MyApplication.OnResponseListen
                  Map<String,String> params = new HashMap<String,String>();
                  params.put("yearmonth",yearmonth);
                  ServerSend("monthmatch",params);
+                 ServerSend("monthbmatch",params);
 
              }
          });

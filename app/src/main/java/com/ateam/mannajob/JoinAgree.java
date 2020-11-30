@@ -54,13 +54,12 @@ public class JoinAgree extends AppCompatActivity {
                 intent.putExtra("m_api", m_api);
                 if(!m_api.equals("x")) {
                     intent.putExtra("m_id", id);
+                    intent.putExtra("m_name", name);
                     if (m_api.equals("n")) {
                         intent.putExtra("m_email", email);
                     }
-                    intent.putExtra("m_name", name);
                 }
-                    startActivity(intent);
-
+                startActivity(intent);
                 finish();
             }
         });
